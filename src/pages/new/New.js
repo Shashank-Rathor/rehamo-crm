@@ -5,6 +5,7 @@ import Navbar from '../../components/navbar/Navbar';
 import { useState,useEffect } from 'react';
 import { addDoc, collection, doc, serverTimestamp, setDoc,getDocs,updateDoc  } from "firebase/firestore"; 
 import { db } from '../../firebase';
+import AddBoxIcon from '@mui/icons-material/AddBox';
 import { useNavigate } from 'react-router-dom';
 
 const New = () => {
@@ -28,21 +29,25 @@ const New = () => {
     });
     const [order_id,setOrderID] = useState("");
     const [order_number,setOrderNumber] = useState("");
-    const [currentDate, setCurrentDate] = useState('');
-    const [userName, setUserName] = useState('');
+    const [modal, setModal] = useState(false);
+    const [remarksList, setremarksList] = useState([]);
 
     var OrderID = '';
     var ordernumber = 10000;
+    var listremarks = [];
 
     
     useEffect(() => {
 
         const user = JSON.parse(localStorage.getItem('user'));
         if (user) {
-            setFormData({crm: user.displayName})
+            setFormData({
+                crm: user.displayName,
+                date:(getFormattedDate())
+            })
         }
 
-        setCurrentDate(getFormattedDate());
+        
 
         const fetchData = async() => {
           let list = []
@@ -85,6 +90,29 @@ const New = () => {
         }));
     }
 
+    const handleRemarks = (e) => {
+        const id = e.target.id;
+        var value = e.target.value;
+
+        setremarksList((prevData) => ({
+            ...prevData,
+            [id]: value,
+        }));
+    }
+
+    const addRemarks = (e) => {
+        e.preventDefault();
+        setModal(false)
+
+        if(formData.remarks !=undefined){
+            setFormData({remarks: [...formData.remarks, remarksList]})
+        }
+        else{
+            setFormData({remarks: [remarksList]})
+        }
+        console.log(formData.remarks)
+    }
+    
 
     const handleAdd = async(e) => {
         e.preventDefault();
@@ -128,6 +156,21 @@ const New = () => {
 
     }
 
+    let remarksModal = null;
+
+    if(modal === true){
+        remarksModal = (
+        <div className={classes.modal}>
+            <div className={classes.remarksModal}>
+                <label style={{marginBottom: "10%"}}>Add Remarks</label>
+                <input id="remarks Date" className={classes.remarksInput} type="date" placeholder="date" onChange={handleRemarks}/>
+                <textarea id="Remark" className={classes.remarksInput} type="textArea" placeholder="remarks" onChange={handleRemarks}/>
+                <button className={classes.remarksButton} onClick={(e) =>addRemarks(e)}>Add</button>
+            </div>
+        </div>
+        )
+    }
+
   return (
     <div className={classes.new}>
         <Sidebar/>
@@ -136,6 +179,7 @@ const New = () => {
              <div className={classes.top}>
              <h1>Add New Enquiry</h1></div>
              <div className={classes.bottom}>
+                {remarksModal}
                 <form onSubmit={handleAdd}>
                     <div className={classes.formInput}>
                         <label>Date</label>
@@ -144,7 +188,7 @@ const New = () => {
                         type="date" 
                         placeholder='date'
                         required
-                        value={formData.date || currentDate}
+                        value={formData.date}
                         onChange={handleInput}
                         />
                     </div>
@@ -257,15 +301,8 @@ const New = () => {
                         </select>
                     </div>
                     <div className={classes.formInput}>
-                        <label>Remarks</label>
-                        <input 
-                        id="remarks" 
-                        type="text" 
-                        placeholder='remarks'
-                        value={formData.remarks}
-                        onChange={handleInput}
-                        />
-                    </div>
+                        <label >Remarks <AddBoxIcon style={{cursor: "pointer"}} onClick={() => setModal(true)}/></label>
+                    </div>  
                     <div className={classes.formInput}>
                         <label>Status</label>
                         <select 
