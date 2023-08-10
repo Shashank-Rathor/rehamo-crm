@@ -28,7 +28,8 @@ const Datatable = () => {
 
   const handleDelete = async(id) =>{
       try{
-        await deleteDoc(doc(db, "cities", id));
+        console.log(id)
+        await deleteDoc(doc(db, "enquiries", id));
         setData(data.filter((item) => item.id !== id))
       }
       catch(err){
