@@ -29,12 +29,18 @@ const New = () => {
     const [order_id,setOrderID] = useState("");
     const [order_number,setOrderNumber] = useState("");
     const [currentDate, setCurrentDate] = useState('');
+    const [userName, setUserName] = useState('');
 
     var OrderID = '';
     var ordernumber = 10000;
 
     
     useEffect(() => {
+
+        const user = JSON.parse(localStorage.getItem('user'));
+        if (user) {
+            setFormData({crm: user.displayName})
+        }
 
         setCurrentDate(getFormattedDate());
 
@@ -83,7 +89,8 @@ const New = () => {
     const handleAdd = async(e) => {
         e.preventDefault();
         
-
+        if(formData.date && formData.crm && formData.source && formData.enquirytype && formData.name && formData.address && formData.product && formData.typeofpurchase && formData.remarks && formData.status)
+        {
         try{
             const res = await setDoc(doc(db, "enquiries",order_id), {
                     ID: order_id,
@@ -114,6 +121,10 @@ const New = () => {
         catch(err){
             console.log(err)
         }
+    }
+    else{
+        alert("Enter all details")
+    }
 
     }
 
@@ -132,22 +143,20 @@ const New = () => {
                         id ="date" 
                         type="date" 
                         placeholder='date'
+                        required
                         value={formData.date || currentDate}
                         onChange={handleInput}
                         />
                     </div>
                     <div className={classes.formInput}>
                         <label>CRM</label>
-                        <select 
-                        id="crm" 
-                        name="crm"
+                        <input 
+                        id="name" 
+                        type="text" 
+                        placeholder='name'
                         value={formData.crm}
-                        onChange={handleInput}
-                        >
-                            <option value="Default">Select</option>
-                            <option value="Vicky">Vicky</option>
-                            <option value="Ramya">Ramya</option>
-                        </select>
+                        disabled
+                        />
                     </div>
                     <div className={classes.formInput}>
                         <label>Source</label>
