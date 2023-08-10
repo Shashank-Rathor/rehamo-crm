@@ -24,6 +24,15 @@
     width: 100px;
     padding-left: 5%;
 }
+.deleteButton{
+    font-size: 20px;
+    color: #7451f8;
+    background-color: #7551f84b;
+    cursor: pointer;
+    border-radius: 5px;
+    width: 100px;
+    padding-left: 5%;
+}
 .detailContainer{
     display: flex;
     -webkit-box-shadow: -2px -5px 18px -8px #000000; 

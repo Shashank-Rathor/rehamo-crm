@@ -30,22 +30,7 @@ export const userColoumns = [
             return( `${classes.closed}`)
         }
     }
-},
-{
-    field: "action",
-    headerName: "Action",
-    width: 200,
-    renderCell:(params)=>{
-      return(
-        <div className={classes.cellAction}>
-          <Link to={`/enquiry?id=${params.row.ID}`}style={{textDecoration:"none"}}>
-          <div className={classes.viewButton}>View</div>
-          </Link>
-            <div className={classes.deleteButton}>Delete</div>
-        </div>
-      )
-    }
-  }
+}
    
 ]
 
