@@ -1,0 +1,7 @@
+.enquiries{
+    display: flex;
+    width: 100%;
+}
+.enquiriescontainer{
+    flex: 6;
+}

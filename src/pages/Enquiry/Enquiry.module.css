@@ -1,0 +1,49 @@
+.single{
+    display: flex;
+    width: 100%;
+}
+.singleContainer{
+    flex: 6
+}
+.title{
+    color: gray;
+}
+.enquiryContainer{
+    position: relative;
+    padding: 15px;
+}
+.editButton{
+    position: absolute;
+    top: 15px;
+    right: 2%;
+    font-size: 20px;
+    color: #7451f8;
+    background-color: #7551f84b;
+    cursor: pointer;
+    border-radius: 5px;
+    width: 100px;
+    padding-left: 5%;
+}
+.detailContainer{
+    display: flex;
+    -webkit-box-shadow: -2px -5px 18px -8px #000000; 
+    box-shadow: -2px -5px 18px -8px #000000;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: space-around;
+    margin-top: 40px;
+    margin-bottom: 40px;
+    border-radius: 5px;
+    padding: 20px;
+}
+.detailItem{
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+}
+.itemKey{
+    color: black;
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}

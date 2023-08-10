@@ -1,0 +1,23 @@
+.main{
+   display: flex; 
+}
+.container{
+    flex: 6;
+}
+.widgets{
+    display: flex;
+    padding: 20px;
+    gap: 20px;
+}
+.listContainer{
+    -webkit-box-shadow: -2px -5px 18px -8px #000000; 
+    box-shadow: -2px -5px 18px -8px #000000;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px;
+}
+.listTitle{
+    font-weight: 500;
+    color: gray;
+    margin-bottom: 15px;
+}
