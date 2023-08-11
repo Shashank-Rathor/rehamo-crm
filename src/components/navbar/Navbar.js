@@ -7,6 +7,7 @@ import { AuthContext } from "../context/AuthContext";
 import { useContext } from "react";
 import { collection, getDocs,doc, deleteDoc } from "firebase/firestore";
 import { db } from "../../firebase";
+import { UndoRounded } from '@mui/icons-material';
 
 const Navbar = () => {
   const [name, setName] = useState([]);
@@ -35,7 +36,8 @@ useEffect(() => {
     });
     setData(list)
     list.map((item) => {
-      var dateArray = item.Date.split("-");
+      if(item.ReminderDate){
+      var dateArray = item.ReminderDate.split("-");
       var day = dateArray[2].split("T")[0]
       var month = dateArray[1]
       var year = dateArray[0];
@@ -43,6 +45,10 @@ useEffect(() => {
       if(day == todayDay && month == todayMonth && year == todayYear ){
         notificationList.push({...item})
       }
+    }
+    else{
+      return
+    }
     })
     setNotifications(notificationList);
     setNotificationCount(notificationList.length);

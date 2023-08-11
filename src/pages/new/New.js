@@ -16,6 +16,7 @@ const New = () => {
     const [formData, setFormData] = useState({
         id:'',
         date: '',
+        reminderDate:'',
         crm:'',
         source:'',
         enquirytype:'',
@@ -30,15 +31,12 @@ const New = () => {
     });
     const [order_id,setOrderID] = useState("");
     const [order_number,setOrderNumber] = useState("");
-    const [isModalOpen, setIsModalOpen] = useState(false);
     const [dataArray, setDataArray] = useState([]);
     const [inputValue2, setInputValue2] = useState('');
 
 
     var OrderID = '';
     var ordernumber = 10000;
-    var listremarks = [];
-
     
     useEffect(() => {
 
@@ -117,6 +115,7 @@ const New = () => {
                     TypeOfPurchase: formData.typeofpurchase,
                     Remarks: dataArray,
                     Status: formData.status,
+                    ReminderDate: formData.reminderDate || null,
                     
               })
               .then(()=>{
@@ -285,6 +284,17 @@ const New = () => {
                             <option value="sold">Sold</option>
                         </select>
                     </div>
+                    <div className={classes.formInput}>
+                        <label>Reminder Date</label>
+                        <input 
+                        id ="reminderDate" 
+                        type="date" 
+                        placeholder='date'
+                        value={formData.reminderDate}
+                        onChange={handleInput}
+                        />
+                    </div>
+                    <div className={classes.formInput}></div>
                     <div className={classes.formInput}>
                         <label>Product</label>
                         <textarea 

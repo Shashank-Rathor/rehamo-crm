@@ -16,6 +16,7 @@ const Edit = () => {
     const [formData, setFormData] = useState({
         id:'',
         date: '',
+        reminderDate:'',
         crm:'',
         source:'',
         enquirytype:'',
@@ -68,12 +69,14 @@ const Edit = () => {
                     typeofpurchase: res.data().TypeOfPurchase,
                     remarks: res.data().Remarks,
                     status: res.data().Status,
+                    reminderDate: res.data().ReminderDate,
                 })
                 setDataArray(res.data().Remarks)
             }
           })
           }
           fetchData();
+          console.log(data)
       },[]);
 
     const handleInput = (e) => {
@@ -106,7 +109,7 @@ const Edit = () => {
                     TypeOfPurchase: formData.typeofpurchase,
                     Remarks: dataArray,
                     Status: formData.status,
-                    
+                    ReminderDate: formData.reminderDate || null,
               })
               .then(()=>{
                 navigate("/enquiries")
@@ -146,7 +149,7 @@ const Edit = () => {
                         <input 
                         disabled    
                         id ="date" 
-                        type="date" 
+                        type="datetime-local" 
                         placeholder='date'
                         value={formData.date}
                         />
@@ -266,6 +269,17 @@ const Edit = () => {
                             <option value="sold">Sold</option>
                         </select>
                     </div>
+                    <div className={classes.formInput}>
+                        <label>Reminder Date</label>
+                        <input 
+                        id ="reminderDate" 
+                        type="date" 
+                        placeholder='date'
+                        value={formData.reminderDate}
+                        onChange={handleInput}
+                        />
+                    </div>
+                    <div className={classes.formInput}></div>
                     <div className={classes.formInput}>
                         <label>Product</label>
                         <textarea 
