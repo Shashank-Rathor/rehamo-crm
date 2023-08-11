@@ -32,6 +32,8 @@ const New = () => {
     const [order_number,setOrderNumber] = useState("");
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [dataArray, setDataArray] = useState([]);
+    const [inputValue2, setInputValue2] = useState('');
+
 
     var OrderID = '';
     var ordernumber = 10000;
@@ -46,6 +48,7 @@ const New = () => {
                 crm: user.displayName,
                 date:(getFormattedDate())
             })
+            
         }
 
         
@@ -136,12 +139,14 @@ const New = () => {
 
     }
 
-    const handleModalOpen = () => {
-        setIsModalOpen(true);
-      };
     
-      const handleModalClose = () => {
-        setIsModalOpen(false);
+      const handleInputChange2 = (e) => {
+        setInputValue2(e.target.value);
+      };
+
+      const handleRemarkSubmit = () => {
+        handleDataSubmit({ input1: formData.date, input2: inputValue2 });
+        setInputValue2('');
       };
 
       const handleDataSubmit = (newData) => {
@@ -156,11 +161,6 @@ const New = () => {
              <div className={classes.top}>
              <h1>Add New Enquiry</h1></div>
              <div className={classes.bottom}>
-             <Modal
-                    isOpen={isModalOpen}
-                    onClose={handleModalClose}
-                    onSubmit={handleDataSubmit}
-                    />
                 <form onSubmit={handleAdd}>
                     <div className={classes.formInput}>
                         <label>Date</label>
@@ -256,16 +256,6 @@ const New = () => {
                         />
                     </div>
                     <div className={classes.formInput}>
-                        <label>Product</label>
-                        <input 
-                        id="product" 
-                        type="text" 
-                        placeholder='product'
-                        value={formData.product}
-                        onChange={handleInput}
-                        />
-                    </div>
-                    <div className={classes.formInput}>
                         <label>Type of Purchase</label>
                         <select 
                         id="typeofpurchase" 
@@ -282,16 +272,6 @@ const New = () => {
                         </select>
                     </div>
                     <div className={classes.formInput}>
-                        <label >Remarks <AddBoxIcon style={{cursor: "pointer"}} onClick={handleModalOpen}/></label>
-                        <ul>
-                         {dataArray.map((data, index) => (
-                            <li key={index}>
-                             <b>Date: </b> {data.input1}, <b>Remarks:</b> {data.input2}
-                            </li>
-                         ))}
-                        </ul>
-                    </div>  
-                    <div className={classes.formInput}>
                         <label>Status</label>
                         <select 
                         id="status" 
@@ -305,6 +285,32 @@ const New = () => {
                             <option value="sold">Sold</option>
                         </select>
                     </div>
+                    <div className={classes.formInput}>
+                        <label>Product</label>
+                        <textarea 
+                        id="product" 
+                        type="textArea" 
+                        rows="5" cols="50"  
+                        placeholder='product'
+                        className={classes.remarksInput}
+                        value={formData.product}
+                        onChange={handleInput}
+                        />
+                    </div>
+                    <div className={classes.formInput}>
+                        <label >Remarks </label>
+                        <ul style={{padding: "0"}}>
+                         {dataArray.map((data, index) => (
+                            <li key={index}>
+                             <b>Date: </b> {data.input1}, <b>Remarks:</b> {data.input2}
+                            </li>
+                         ))}
+                        </ul>
+                        <input id="RemarksDate" className={classes.remarksInput} type="datetime-local"  hidden value={formData.date} placeholder="date"/>
+                        <textarea id="Remark" className={classes.remarksInput} type="textArea" rows="5" cols="50"   placeholder="remarks" value={inputValue2} onChange={handleInputChange2}/>
+                        <div className={classes.remarksButton} onClick={handleRemarkSubmit}>Add</div>
+                    </div>  
+        
                     <button type="submit" className={classes.sendButton}>Send</button>
                 </form>
              </div>

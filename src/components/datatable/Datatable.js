@@ -17,7 +17,7 @@ const Datatable = () => {
       querySnapshot.forEach((doc) => {
         list.push({id: doc.id, ...doc.data()});
       });
-      setData(list)
+      setData(list.reverse())
       }
       catch(err){
         console.log(err)

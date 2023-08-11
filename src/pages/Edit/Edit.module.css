@@ -22,7 +22,7 @@ h1{
 form{
     display: flex;
     flex-wrap: wrap;
-    gap: 30px;
+    gap: 10px;
     justify-content: space-around;
     margin-top: 40px;
     margin-bottom: 40px;
@@ -42,7 +42,7 @@ label{
     gap: 10px;
 }
 .sendButton{
-    width: 150px;
+    width: 40%;
     padding: 10px;
     border: none;
     background-color: teal;
@@ -56,4 +56,20 @@ select{
     padding: 5px;
     border: none;
     border-bottom: 1px solid gray;
+}
+.remarksButton{
+    width: 80px;
+    height: 40px;
+    border: none;
+    background-color: teal;
+    color: white;
+    cursor: pointer;
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.remarksInput{
+    width: 95%;
+    margin: 0 0 10px 0;
 }
