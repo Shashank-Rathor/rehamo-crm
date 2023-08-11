@@ -1,0 +1,34 @@
+.remarksModal{
+    position: absolute;
+    top: 30%;
+    left: 35%;
+    width: 20%;
+    background-color: #f3f3f3;
+    padding-left: 5%;
+    padding-right: 5%;
+    padding-bottom: 5%;
+    padding-top: 2%;
+    border-radius: 10px;
+    font-size: 20px;
+    font-weight: bold;
+}
+.modal{
+    position: absolute;
+    background-color: #8f8f8f60;
+    width: 98%;
+    height: 98%;
+    border-radius: 10px;
+}
+.remarksButton{
+    width: 100px;
+    padding: 10px;
+    border: none;
+    background-color: teal;
+    color: white;
+    cursor: pointer;
+    margin-top: 20px;
+}
+.remarksInput{
+    width: 95%;
+    margin: 0 0 10px 0;
+}

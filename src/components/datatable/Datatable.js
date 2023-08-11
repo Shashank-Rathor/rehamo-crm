@@ -23,6 +23,7 @@ const Datatable = () => {
         console.log(err)
       }
     };
+    
     fetchData()
   },[]);
 

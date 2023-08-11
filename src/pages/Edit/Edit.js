@@ -6,6 +6,8 @@ import { useState,useEffect } from 'react';
 import { addDoc, collection, doc, setDoc,updateDoc,getDoc,get  } from "firebase/firestore"; 
 import { db } from '../../firebase';
 import { useNavigate } from 'react-router-dom';
+import Modal from '../../components/modal/Modal';
+import AddBoxIcon from '@mui/icons-material/AddBox';
 
 const Edit = () => {
     
@@ -28,6 +30,8 @@ const Edit = () => {
     });
     const [data,setData] = useState([]);
     const [order_id,setOrderID] = useState("");
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [dataArray, setDataArray] = useState([]);
 
     var id='';
 
@@ -64,6 +68,7 @@ const Edit = () => {
                     remarks: res.data().Remarks,
                     status: res.data().Status,
                 })
+                setDataArray(res.data().Remarks)
             }
           })
           }
@@ -98,7 +103,7 @@ const Edit = () => {
                     Email: formData.email,
                     Product: formData.product,
                     TypeOfPurchase: formData.typeofpurchase,
-                    Remarks: formData.remarks,
+                    Remarks: dataArray,
                     Status: formData.status,
                     
               })
@@ -109,8 +114,20 @@ const Edit = () => {
         catch(err){
             console.log(err)
         }
-
+    
     }
+    
+    const handleModalOpen = () => {
+        setIsModalOpen(true);
+      };
+    
+      const handleModalClose = () => {
+        setIsModalOpen(false);
+      };
+
+      const handleDataSubmit = (newData) => {
+        setDataArray([...dataArray, newData]);
+      };
 
   return (
     <div className={classes.new}>
@@ -118,8 +135,13 @@ const Edit = () => {
         <div className={classes.newContainer}>
             <Navbar/>
              <div className={classes.top}>
-             <h1>Add New Enquiry</h1></div>
+             <h1>Edit Enquiry</h1></div>
              <div className={classes.bottom}>
+             <Modal
+                    isOpen={isModalOpen}
+                    onClose={handleModalClose}
+                    onSubmit={handleDataSubmit}
+                    />
                 <form onSubmit={handleAdd}>
                 <div className={classes.formInput}>
                         <label>Date</label>
@@ -243,15 +265,15 @@ const Edit = () => {
                         </select>
                     </div>
                     <div className={classes.formInput}>
-                        <label>Remarks</label>
-                        <input 
-                        id="remarks" 
-                        type="text" 
-                        placeholder='remarks'
-                        value={formData.remarks}
-                        onChange={handleInput}
-                        />
-                    </div>
+                        <label >Remarks <AddBoxIcon style={{cursor: "pointer"}} onClick={handleModalOpen}/></label>
+                        <ul style={{paddingLeft: "0px",marginTop: "10px"}}>
+                         {dataArray.map((data, index) => (
+                            <li key={index}>
+                             <b>Date: </b> {data.input1}, <b>Remarks:</b> {data.input2}
+                            </li>
+                         ))}
+                        </ul>
+                    </div>  
                     <div className={classes.formInput}>
                         <label>Status</label>
                         <select 

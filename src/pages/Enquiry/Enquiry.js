@@ -8,7 +8,10 @@ import {db} from "../../firebase";
 
 const Enquiry = () => {
   const [name, setName] = useState([]);
-  const [data,setData] = useState({});
+  const [remarks,setRemarks] = useState({});
+
+const [data,setData] = useState([]);
+const [dataArray, setDataArray] = useState([]);
 
   var id='';
 
@@ -17,26 +20,30 @@ const Enquiry = () => {
   if (user) {
    setName(user.displayName);
   }
-    const fetchData = async () => {
-      var mainurl = document.location.href,
-      params = mainurl.split('?')[1].split('&'),
-      data = {},
-      tmp
-    for (var i = 0, l = params.length; i < l; i++) {
-      tmp = params[i].split('=')
-      data[tmp[0]] = tmp[1]
+  const fetchData =  () => {
+    var mainurl = document.location.href,
+    params = mainurl.split('?')[1].split('&'),
+    data = {},
+    tmp
+  for (var i = 0, l = params.length; i < l; i++) {
+    tmp = params[i].split('=')
+    data[tmp[0]] = tmp[1]
+  }
+  id = data.id
+  
+  const docRef = doc(db, "enquiries", id);
+   
+  return getDoc(docRef)
+  .then((res) =>{
+    if(res){
+        setData(res.data())
+        setDataArray(res.data().Remarks)
     }
-    id = data.id
-    
-    const docRef = doc(db, "enquiries", id);
-    const docSnap = await getDoc(docRef);
-    setData(docSnap.data())
-    }
-    fetchData();
+  })
+  }
+  fetchData();
   },[])
 
-  console.log(data.Crm)
-  console.log(name)
   
   return (
     <div className={classes.single}>
@@ -47,60 +54,54 @@ const Enquiry = () => {
                 {name == data.Crm ? <Link to={`/enquiry/edit?id=${data.ID}`}>
                 <div className={classes.editButton}>Edit</div>
                 </Link> : <></>}
-                <h1 className={classes.title}>User Name</h1>
+                <h1 className={classes.title}>{data.Name}</h1>
                 <div className={classes.detailContainer}>
                     <div className={classes.detailItem}>
-                      <span className={classes.itemKey}>ID:</span>
-                      <span className={classes.itemValue}>{data.ID}</span>
+                      <span className={classes.itemKey}>ID: <span>{data.ID}</span></span>
                     </div>
                     <div className={classes.detailItem}>
-                      <span className={classes.itemKey}>Date:</span>
-                      <span className={classes.itemValue}>{data.Date}</span>
+                      <span className={classes.itemKey}>Date: <span>{data.Date}</span></span>
                     </div>
                     <div className={classes.detailItem}>
-                      <span className={classes.itemKey}>CRM:</span>
-                      <span className={classes.itemValue}>{data.Crm}</span>
+                      <span className={classes.itemKey}>CRM: <span>{data.Crm}</span></span>
                     </div>
                     <div className={classes.detailItem}>
-                      <span className={classes.itemKey}>Source:</span>
-                      <span className={classes.itemValue}>{data.Source}</span>
+                      <span className={classes.itemKey}>Source: <span>{data.Source}</span></span>
                     </div>
                     <div className={classes.detailItem}>
-                      <span className={classes.itemKey}>Enquiry Type:</span>
-                      <span className={classes.itemValue}>{data.EnquiryType}</span>
+                      <span className={classes.itemKey}>Enquiry Type: <span>{data.EnquiryType}</span></span>
                     </div>
                     <div className={classes.detailItem}>
-                      <span className={classes.itemKey}>Name:</span>
-                      <span className={classes.itemValue}>{data.Name}</span>
+                      <span className={classes.itemKey}>Name: <span>{data.Name}</span></span>
                     </div>
                     <div className={classes.detailItem}>
-                      <span className={classes.itemKey}>Address:</span>
-                      <span className={classes.itemValue}>{data.Address}</span>
+                      <span className={classes.itemKey}>Address: <span>{data.Address}</span></span>
                     </div>
                     <div className={classes.detailItem}>
-                      <span className={classes.itemKey}>Contact:</span>
-                      <span className={classes.itemValue}>{data.Contact}</span>
+                      <span className={classes.itemKey}>Contact: <span>{data.Contact}</span></span>
                     </div>
                     <div className={classes.detailItem}>
-                      <span className={classes.itemKey}>Email:</span>
-                      <span className={classes.itemValue}>{data.Email}</span>
+                      <span className={classes.itemKey}>Email: <span>{data.Email}</span></span>
                     </div>
                     <div className={classes.detailItem}>
-                      <span className={classes.itemKey}>Product:</span>
-                      <span className={classes.itemValue}>{data.Product}</span>
+                      <span className={classes.itemKey}>Product: <span>{data.Product}</span></span>
                     </div>
                     <div className={classes.detailItem}>
-                      <span className={classes.itemKey}>Type of Purchase:</span>
-                      <span className={classes.itemValue}>{data.TypeOfPurchase}</span>
+                      <span className={classes.itemKey}>Type of Purchase: <span>{data.TypeOfPurchase}</span></span>
                     </div>
                     <div className={classes.detailItem}>
-                      <span className={classes.itemKey}>Remarks:</span>
-                      <span className={classes.itemValue}>{data.Remarks}</span>
+                      <span className={classes.itemKey}>Status: <span>{data.Status}</span></span>
                     </div>
                     <div className={classes.detailItem}>
-                      <span className={classes.itemKey}>Status:</span>
-                      <span className={classes.itemValue}>{data.Status}</span>
-                    </div>
+                    <span className={classes.itemKey}>Remarks</span>
+                        <ul style={{paddingLeft: "5px"}}>
+                         {dataArray.map((data, index) => (
+                            <li key={index} className={classes.itemValue} >
+                             <b>Date: </b> {data.input1}, <b>Remarks:</b> {data.input2}
+                            </li>
+                         ))}
+                        </ul>
+                    </div>  
                     <div className={classes.detailItem}/>
                 </div>
               </div>

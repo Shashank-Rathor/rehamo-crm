@@ -7,6 +7,7 @@ import { addDoc, collection, doc, serverTimestamp, setDoc,getDocs,updateDoc  } f
 import { db } from '../../firebase';
 import AddBoxIcon from '@mui/icons-material/AddBox';
 import { useNavigate } from 'react-router-dom';
+import Modal from '../../components/modal/Modal';
 
 const New = () => {
     
@@ -29,8 +30,8 @@ const New = () => {
     });
     const [order_id,setOrderID] = useState("");
     const [order_number,setOrderNumber] = useState("");
-    const [modal, setModal] = useState(false);
-    const [remarksList, setremarksList] = useState([]);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [dataArray, setDataArray] = useState([]);
 
     var OrderID = '';
     var ordernumber = 10000;
@@ -90,34 +91,11 @@ const New = () => {
         }));
     }
 
-    const handleRemarks = (e) => {
-        const id = e.target.id;
-        var value = e.target.value;
-
-        setremarksList((prevData) => ({
-            ...prevData,
-            [id]: value,
-        }));
-    }
-
-    const addRemarks = (e) => {
-        e.preventDefault();
-        setModal(false)
-
-        if(formData.remarks !=undefined){
-            setFormData({remarks: [...formData.remarks, remarksList]})
-        }
-        else{
-            setFormData({remarks: [remarksList]})
-        }
-        console.log(formData.remarks)
-    }
-    
 
     const handleAdd = async(e) => {
         e.preventDefault();
         
-        if(formData.date && formData.crm && formData.source && formData.enquirytype && formData.name && formData.address && formData.product && formData.typeofpurchase && formData.remarks && formData.status)
+        if(formData.date && formData.crm && formData.source && formData.enquirytype && formData.name && formData.address && formData.product && formData.typeofpurchase && formData.status)
         {
         try{
             const res = await setDoc(doc(db, "enquiries",order_id), {
@@ -132,7 +110,7 @@ const New = () => {
                     Email: formData.email,
                     Product: formData.product,
                     TypeOfPurchase: formData.typeofpurchase,
-                    Remarks: formData.remarks,
+                    Remarks: dataArray,
                     Status: formData.status,
                     
               })
@@ -156,20 +134,17 @@ const New = () => {
 
     }
 
-    let remarksModal = null;
+    const handleModalOpen = () => {
+        setIsModalOpen(true);
+      };
+    
+      const handleModalClose = () => {
+        setIsModalOpen(false);
+      };
 
-    if(modal === true){
-        remarksModal = (
-        <div className={classes.modal}>
-            <div className={classes.remarksModal}>
-                <label style={{marginBottom: "10%"}}>Add Remarks</label>
-                <input id="remarks Date" className={classes.remarksInput} type="date" placeholder="date" onChange={handleRemarks}/>
-                <textarea id="Remark" className={classes.remarksInput} type="textArea" placeholder="remarks" onChange={handleRemarks}/>
-                <button className={classes.remarksButton} onClick={(e) =>addRemarks(e)}>Add</button>
-            </div>
-        </div>
-        )
-    }
+      const handleDataSubmit = (newData) => {
+        setDataArray([...dataArray, newData]);
+      };
 
   return (
     <div className={classes.new}>
@@ -179,7 +154,11 @@ const New = () => {
              <div className={classes.top}>
              <h1>Add New Enquiry</h1></div>
              <div className={classes.bottom}>
-                {remarksModal}
+             <Modal
+                    isOpen={isModalOpen}
+                    onClose={handleModalClose}
+                    onSubmit={handleDataSubmit}
+                    />
                 <form onSubmit={handleAdd}>
                     <div className={classes.formInput}>
                         <label>Date</label>
@@ -301,7 +280,14 @@ const New = () => {
                         </select>
                     </div>
                     <div className={classes.formInput}>
-                        <label >Remarks <AddBoxIcon style={{cursor: "pointer"}} onClick={() => setModal(true)}/></label>
+                        <label >Remarks <AddBoxIcon style={{cursor: "pointer"}} onClick={handleModalOpen}/></label>
+                        <ul>
+                         {dataArray.map((data, index) => (
+                            <li key={index}>
+                             <b>Date: </b> {data.input1}, <b>Remarks:</b> {data.input2}
+                            </li>
+                         ))}
+                        </ul>
                     </div>  
                     <div className={classes.formInput}>
                         <label>Status</label>

@@ -7,12 +7,11 @@ export const userColoumns = [
   {field: 'Source',headerName: 'Source',width: 100},
   {field: 'EnquiryType',headerName: 'Enquiry Type',width: 70},
   {field: 'Name',headerName: 'Name',width: 100},
-  {field: 'Address',headerName: 'Address',width: 70},
-  {field: 'Contact',headerName: 'Contact',width: 70},
-  {field: 'Email',headerName: 'Email',width: 70},
-  {field: 'Product',headerName: 'Product',width: 70},
+  {field: 'Address',headerName: 'Address',width: 90},
+  {field: 'Contact',headerName: 'Contact',width: 110},
+  {field: 'Email',headerName: 'Email',width: 110},
+  {field: 'Product',headerName: 'Product',width: 100},
   {field: 'TypeOfPurchase',headerName: 'Type of Purchase',width: 70},
-  {field: 'Remarks',headerName: 'Remarks',width: 70},
   
   {
     field: 'Status',
