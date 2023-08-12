@@ -26,6 +26,7 @@
     font-weight: 300;
 }
 .link{
+    cursor: pointer;
     width: max-content;
     font-size: 12px;
     border-bottom: 1px solid gray;

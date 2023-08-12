@@ -21,3 +21,25 @@
     color: gray;
     margin-bottom: 15px;
 }
+.filterDate{
+    font-size: 15px;
+}
+.datatableTitle{
+    width: 90%;
+    font-size: 24px;
+    color: gray;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 50px;
+}
+.link{
+    text-decoration: none;
+    color: green;
+    font-size: 16px;
+    font-weight: 400;
+    border: 1px solid green;
+    padding: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+}

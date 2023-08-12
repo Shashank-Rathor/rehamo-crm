@@ -8,6 +8,9 @@ import { db } from "../../firebase";
 
 const Datatable = () => {
   const [data,setData] = useState([]);
+  const [filterData, setFilterData] = useState([]);
+  const [startDate, setStartDate] = useState(" ");
+  const [endDate, setEndDate] = useState(" ");
   
   useEffect(() => {
     const fetchData = async() => {
@@ -18,6 +21,7 @@ const Datatable = () => {
         list.push({id: doc.id, ...doc.data()});
       });
       setData(list.reverse())
+      setFilterData(list)
       }
       catch(err){
         console.log(err)
@@ -36,6 +40,40 @@ const Datatable = () => {
       catch(err){
         console.log(err)
       }
+  }
+
+  const handleFilter = (type) => {
+    if(type == "active"){
+      let active = data.filter(item => item.Status === "active");
+      setFilterData(active)
+    }
+    else if(type == "sold"){
+      let sold = data.filter(item => item.Status === "sold");
+      setFilterData(sold)
+    }
+    else if(type == "closed"){
+      let closed = data.filter(item => item.Status === "closed");
+      setFilterData(closed)
+    }
+    else if(type == "all"){
+      setFilterData(data)
+    }
+  }
+  
+  const handleStartDate = (e) => {
+    setStartDate(e.target.value);
+  }
+  const handleEndDate = (e) => {
+    setEndDate(e.target.value);
+  }
+  const handleFilterDate = () => {
+
+    const dataInRange = data.filter(item => {
+      const itemDate = new Date(item.Date);
+      return itemDate >= new Date(startDate) && itemDate <= new Date(endDate);
+    });
+
+    setFilterData(dataInRange)
   }
 
   const actionColoumn = [
@@ -62,9 +100,23 @@ const Datatable = () => {
         <Link to="/enquiries/new" style={{textDecoration: "none"}} className={classes.link}>
           Add New
         </Link>
+            <div className={classes.filterLink} onClick={() => handleFilter("all")}>All</div>
+            <div className={classes.filterLink} onClick={() => handleFilter("active")}>Active</div>
+            <div className={classes.filterLink} onClick={() => handleFilter("sold")}>Sold</div>
+            <div className={classes.filterLink} onClick={() => handleFilter("closed")}>Closed</div>
+
+            <div className={classes.filterDate}>
+            <label>Start Date</label>
+            <input type="date" id="startDate" value={startDate} onChange={(e) => handleStartDate(e)}/>
+            </div>
+            <div className={classes.filterDate}>
+            <label>End Date</label>
+            <input type="date" id="endDate" value={endDate} onChange={(e) => handleEndDate(e)}/>
+            </div>
+            <div className={classes.link} onClick={() => handleFilterDate()}>FIlter</div>
         </div>
          <DataGrid
-        rows={data}
+        rows={filterData}
         columns={userColoumns.concat(actionColoumn)}
         initialState={{
           pagination: {
@@ -78,4 +130,4 @@ const Datatable = () => {
   )
 }
 
-export default Datatable
+export default Datatable;

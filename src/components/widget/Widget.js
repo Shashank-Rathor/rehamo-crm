@@ -1,21 +1,19 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import classes from './Widget.module.css';
 import ContactSupportIcon from '@mui/icons-material/ContactSupport';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import CancelIcon from '@mui/icons-material/Cancel';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 
-const Widget = ({type}) => {
+const Widget = ({type, closedData,activeData, soldData,list,handleSortFilter}) => {
     let data;
-
 
         switch(type){
             case "active":
                 data={
                     title: "ACTIVE",
-                    count: "100",
+                    count: `${activeData.length}`,
                     link: "See all orders",
-                    percent:"15%",
                     icon: <ContactSupportIcon 
                     className={classes.icon} 
                     style={{
@@ -27,9 +25,8 @@ const Widget = ({type}) => {
                 case "sold":
                 data={
                     title: "SOLD",
-                    count: "120",
+                    count: `${soldData.length}`,
                     link: "See all orders",
-                    percent:"20%",
                     icon: <CheckCircleIcon 
                     className={classes.icon} 
                     style={{
@@ -41,9 +38,8 @@ const Widget = ({type}) => {
                 case "closed":
                     data={
                         title: "CLOSED",
-                        count: "200",
+                        count: `${closedData.length}`,
                         link: "See all orders",
-                        percent:"30%",
                         icon: <CancelIcon 
                         className={classes.icon} 
                         style={{
@@ -55,8 +51,8 @@ const Widget = ({type}) => {
                     case "total":
                         data={
                             title: "TOTAL",
-                            count: "420",
-                            link: "See all orders",
+                            count: `${list.length}`,
+                            link: "",
                             icon: <AddCircleIcon 
                             className={classes.icon} 
                             style={{
@@ -69,12 +65,17 @@ const Widget = ({type}) => {
                     break;
         }
 
+        const handleFilter = (value) => {
+            var type=value.toLowerCase();
+            handleSortFilter(type);
+        }
+
   return (
     <div className={classes.widget}>
         <div className={classes.left}>
             <span className={classes.title}>{data.title}</span>
             <span className={classes.counter}>{data.count}</span>
-            <span className={classes.link}>{data.link}</span>
+            <span className={classes.link} onClick={() => handleFilter(data.title)}>{data.link}</span>
 
         </div>
         <div className={classes.right}>
