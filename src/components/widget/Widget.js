@@ -5,13 +5,13 @@ import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import CancelIcon from '@mui/icons-material/Cancel';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 
-const Widget = ({type, closedData,activeData, soldData,list,handleSortFilter}) => {
+const Widget = ({type, closedData,activeData, soldData,list,activeRevenue,soldRevenue,closedRevenue}) => {
     let data;
 
         switch(type){
             case "active":
                 data={
-                    title: "ACTIVE",
+                    title: "ACTIVE ENQUIRIES",
                     count: `${activeData.length}`,
                     link: "See all orders",
                     icon: <ContactSupportIcon 
@@ -24,7 +24,7 @@ const Widget = ({type, closedData,activeData, soldData,list,handleSortFilter}) =
                 break;
                 case "sold":
                 data={
-                    title: "SOLD",
+                    title: "SOLD ENQUIRIES",
                     count: `${soldData.length}`,
                     link: "See all orders",
                     icon: <CheckCircleIcon 
@@ -37,7 +37,7 @@ const Widget = ({type, closedData,activeData, soldData,list,handleSortFilter}) =
                 break;
                 case "closed":
                     data={
-                        title: "CLOSED",
+                        title: "CLOSED ENQUIRIES",
                         count: `${closedData.length}`,
                         link: "See all orders",
                         icon: <CancelIcon 
@@ -50,8 +50,47 @@ const Widget = ({type, closedData,activeData, soldData,list,handleSortFilter}) =
                     break;
                     case "total":
                         data={
-                            title: "TOTAL",
+                            title: "TOTAL ENQUIRIES",
                             count: `${list.length}`,
+                            link: "",
+                            icon: <AddCircleIcon 
+                            className={classes.icon} 
+                            style={{
+                                color: "blue",
+                                backgroundColor:"rgb(188, 228, 255)"
+                            }}/>,
+                        };
+                        break;
+                        case "revenueGenerated":
+                        data={
+                            title: "REVENUE GENERATED",
+                            count: `${soldRevenue}`,
+                            link: "",
+                            icon: <AddCircleIcon 
+                            className={classes.icon} 
+                            style={{
+                                color: "blue",
+                                backgroundColor:"rgb(188, 228, 255)"
+                            }}/>,
+                        };
+                        break;
+                        case "revenueMissed":
+                        data={
+                            title: "REVENUE MISSED",
+                            count: `${closedRevenue}`,
+                            link: "",
+                            icon: <AddCircleIcon 
+                            className={classes.icon} 
+                            style={{
+                                color: "blue",
+                                backgroundColor:"rgb(188, 228, 255)"
+                            }}/>,
+                        };
+                        break;
+                        case "revenueExpected":
+                        data={
+                            title: "REVENUE EXPECTED",
+                            count: `${activeRevenue}`,
                             link: "",
                             icon: <AddCircleIcon 
                             className={classes.icon} 
@@ -65,17 +104,11 @@ const Widget = ({type, closedData,activeData, soldData,list,handleSortFilter}) =
                     break;
         }
 
-        const handleFilter = (value) => {
-            var type=value.toLowerCase();
-            handleSortFilter(type);
-        }
-
   return (
     <div className={classes.widget}>
         <div className={classes.left}>
             <span className={classes.title}>{data.title}</span>
             <span className={classes.counter}>{data.count}</span>
-            <span className={classes.link} onClick={() => handleFilter(data.title)}>{data.link}</span>
 
         </div>
         <div className={classes.right}>

@@ -70,6 +70,7 @@ const Edit = () => {
                     remarks: res.data().Remarks,
                     status: res.data().Status,
                     reminderDate: res.data().ReminderDate,
+                    revenue: res.data().Revenue,
                 })
                 setDataArray(res.data().Remarks)
             }
@@ -106,6 +107,7 @@ const Edit = () => {
                     Contact: formData.contact,
                     Email: formData.email,
                     Product: formData.product,
+                    Revenue: formData.revenue,
                     TypeOfPurchase: formData.typeofpurchase,
                     Remarks: dataArray,
                     Status: formData.status,
@@ -270,6 +272,16 @@ const Edit = () => {
                         </select>
                     </div>
                     <div className={classes.formInput}>
+                    <label>Revenue</label>
+                    <input 
+                        id="revenue" 
+                        type="text" 
+                        placeholder='revenue'
+                        value={formData.revenue}
+                        onChange={handleInput}
+                        />
+                    </div>
+                    <div className={classes.formInput}>
                         <label>Reminder Date</label>
                         <input 
                         id ="reminderDate" 
@@ -279,7 +291,6 @@ const Edit = () => {
                         onChange={handleInput}
                         />
                     </div>
-                    <div className={classes.formInput}></div>
                     <div className={classes.formInput}>
                         <label>Product</label>
                         <textarea 

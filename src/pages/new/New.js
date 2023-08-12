@@ -28,6 +28,7 @@ const New = () => {
         remarks:'',
         typeofpurchase: '',
         status: '',
+        revenue: '',
     });
     const [order_id,setOrderID] = useState("");
     const [order_number,setOrderNumber] = useState("");
@@ -112,6 +113,7 @@ const New = () => {
                     Contact: formData.contact,
                     Email: formData.email,
                     Product: formData.product,
+                    Revenue: formData.revenue,
                     TypeOfPurchase: formData.typeofpurchase,
                     Remarks: dataArray,
                     Status: formData.status,
@@ -285,7 +287,17 @@ const New = () => {
                         </select>
                     </div>
                     <div className={classes.formInput}>
-                        <label>Reminder Date</label>
+                    <label>Revenue</label>
+                        <input 
+                        id="revenue" 
+                        type="text" 
+                        placeholder='revenue'
+                        value={formData.revenue}
+                        onChange={handleInput}
+                        />
+                    </div>
+                    <div className={classes.formInput}>
+                    <label>Reminder Date</label>
                         <input 
                         id ="reminderDate" 
                         type="date" 
@@ -294,7 +306,6 @@ const New = () => {
                         onChange={handleInput}
                         />
                     </div>
-                    <div className={classes.formInput}></div>
                     <div className={classes.formInput}>
                         <label>Product</label>
                         <textarea 

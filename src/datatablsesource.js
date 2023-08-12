@@ -11,6 +11,7 @@ export const userColoumns = [
   {field: 'Contact',headerName: 'Contact',width: 110},
   {field: 'Email',headerName: 'Email',width: 120},
   {field: 'Product',headerName: 'Product',width: 130},
+  {field: 'Revenue',headerName: 'Revenue',width: 100},
   {field: 'TypeOfPurchase',headerName: 'Type of Purchase',width: 70},
   
   {

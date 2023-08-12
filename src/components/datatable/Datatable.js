@@ -5,12 +5,14 @@ import {userColoumns, userRows} from '../../datatablsesource';
 import { Link } from 'react-router-dom';
 import { collection, getDocs,doc, deleteDoc } from "firebase/firestore";
 import { db } from "../../firebase";
+import Excelexport from '../../components/Excelexport';
 
 const Datatable = () => {
   const [data,setData] = useState([]);
   const [filterData, setFilterData] = useState([]);
   const [startDate, setStartDate] = useState(" ");
   const [endDate, setEndDate] = useState(" ");
+  const [dateData, setdateDate] = useState([]);
   
   useEffect(() => {
     const fetchData = async() => {
@@ -43,6 +45,9 @@ const Datatable = () => {
   }
 
   const handleFilter = (type) => {
+
+    if(dateData.length == 0){
+
     if(type == "active"){
       let active = data.filter(item => item.Status === "active");
       setFilterData(active)
@@ -57,7 +62,26 @@ const Datatable = () => {
     }
     else if(type == "all"){
       setFilterData(data)
+    }      
+  }
+  else{
+    
+    if(type == "active"){
+      let active = dateData.filter(item => item.Status === "active");
+      setFilterData(active)
     }
+    else if(type == "sold"){
+      let sold = dateData.filter(item => item.Status === "sold");
+      setFilterData(sold)
+    }
+    else if(type == "closed"){
+      let closed = dateData.filter(item => item.Status === "closed");
+      setFilterData(closed)
+    }
+    else if(type == "all"){
+      setFilterData(data)
+    } 
+  }
   }
   
   const handleStartDate = (e) => {
@@ -72,8 +96,9 @@ const Datatable = () => {
       const itemDate = new Date(item.Date);
       return itemDate >= new Date(startDate) && itemDate <= new Date(endDate);
     });
-
     setFilterData(dataInRange)
+    setdateDate(dataInRange)
+    
   }
 
   const actionColoumn = [
@@ -114,6 +139,7 @@ const Datatable = () => {
             <input type="date" id="endDate" value={endDate} onChange={(e) => handleEndDate(e)}/>
             </div>
             <div className={classes.link} onClick={() => handleFilterDate()}>FIlter</div>
+            <Excelexport className={classes.link} data={filterData}/>
         </div>
          <DataGrid
         rows={filterData}
