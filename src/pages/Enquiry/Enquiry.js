@@ -92,6 +92,10 @@ const [dataArray, setDataArray] = useState([]);
                     <div className={classes.detailItem}>
                       <span className={classes.itemKey}>Status: <span>{data.Status}</span></span>
                     </div>
+                    {data.ReminderDate !== null ? 
+                    <div className={classes.detailItem}>
+                    <span className={classes.itemKey}>Reminder Date: <span>{data.ReminderDate}</span></span>
+                  </div>:<></>}
                     <div className={classes.detailItem}>
                     <span className={classes.itemKey}>Remarks</span>
                         <ul style={{paddingLeft: "5px"}}>

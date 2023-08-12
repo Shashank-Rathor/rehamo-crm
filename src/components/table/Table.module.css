@@ -22,6 +22,7 @@
 .tableCell{
     padding: 10px !important;
     font-size: 12px !important;
+    color: gray !important;
 }
 .tableHead{
     font-weight: bold !important;
