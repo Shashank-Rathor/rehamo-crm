@@ -3,6 +3,7 @@ import classes from './Navbar.module.css';
 import SearchIcon from '@mui/icons-material/Search';
 import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
 import PersonIcon from '@mui/icons-material/Person';
+import Notifications from '../notifications/Notifications';
 import { AuthContext } from "../context/AuthContext";
 import { useContext } from "react";
 import { collection, getDocs,doc, deleteDoc } from "firebase/firestore";
@@ -14,6 +15,7 @@ const Navbar = () => {
   const [data,setData] = useState([]);
   const [notifications,setNotifications] = useState([]);
   const [notificationCount,setNotificationCount] = useState("");
+  const [isNotification,setIsNotification] = useState(false);
   const {currentUser} = useContext(AuthContext)
 
 useEffect(() => {
@@ -62,6 +64,10 @@ useEffect(() => {
   fetchData();
 }, []);
 
+  const handleNotification = () =>{
+    setIsNotification(!isNotification)
+  }
+
   return (
     <div className={classes.navbar}>
       <div className={classes.wrapper}>
@@ -71,8 +77,9 @@ useEffect(() => {
         </div>
         <div className={classes.items}>
             <div className={classes.item}>
-              <NotificationsNoneIcon className={classes.icon}/>
+              <NotificationsNoneIcon className={classes.icon} onClick={() => handleNotification()}/>
               <div className={classes.counter}>{notificationCount}</div>
+              {isNotification === true ? <Notifications data={notifications}/> : <></>}
             </div>
             <div className={classes.item}>
               <PersonIcon className={classes.icon}/>

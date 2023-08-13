@@ -1,0 +1,21 @@
+.notificationContainer{
+    position: absolute;
+    background-color: white;
+    -webkit-box-shadow: -2px -5px 18px -8px #000000; 
+    box-shadow: -2px -5px 18px -8px #000000;
+    border-radius: 10px;
+    z-index: 2;
+    top: 60%;
+    right: 100%;
+    padding: 15px;
+    width: 20vw;
+}
+.notifyTitle{
+    font-size:  15px;
+    text-align: left;
+    font-weight: bold;
+    color: black
+}
+.notifyList{
+    margin-top: 20px;
+}
