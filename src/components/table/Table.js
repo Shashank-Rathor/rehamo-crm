@@ -9,7 +9,7 @@ const List = ({data}) => {
     {
       field: "ReminderDate",
       headerName: "Reminder Date",
-      width: 200,
+      width: 110,
       renderCell:(params)=>{
         return(
           <div className={classes.cellAction}>

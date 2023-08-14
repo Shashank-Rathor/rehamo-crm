@@ -44,6 +44,10 @@ useEffect(() => {
       var month = dateArray[1]
       var year = dateArray[0];
 
+      console.log(item.Crm)
+      console.log(currentUser)
+
+      if(item.Crm === currentUser.displayName){
       if(day == todayDay && month == todayMonth && year == todayYear ){
         notificationList.push({...item})
       }
@@ -51,10 +55,10 @@ useEffect(() => {
     else{
       return
     }
+  }
     })
     setNotifications(notificationList);
     setNotificationCount(notificationList.length);
-    console.log(notificationList)
     }
     catch(err){
       console.log(err)
