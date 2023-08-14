@@ -6,10 +6,12 @@ import Widget from '../../components/widget/Widget';
 import Table from '../../components/table/Table';
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../../firebase";
+import CrmDashboard from '../../components/crmDashboard/CrmDashboard';
+import { useContext } from "react";
+import { DataContext } from '../../components/context/DataContext';
 
 
 const Home = () => {
-   const [data,setData] = useState([]);
    const [activeData,setActiveData] = useState([]);
    const [soldData,setSoldData] = useState([]);
    const [closedData,setClosedData] = useState([]);
@@ -20,27 +22,10 @@ const Home = () => {
    const [sumActive, setSumActive] = useState("");
    const [sumSold, setSumSold] = useState("");
    const [sumClosed, setSumClosed] = useState("");
-   
+   const {data} = useContext(DataContext);
 
   useEffect(() => {
-    const fetchData = async() => {
-      let list = []
-      try{
-        const querySnapshot = await getDocs(collection(db, "enquiries"));
-      querySnapshot.forEach((doc) => {
-        list.push({id: doc.id, ...doc.data()});
-      });
-      setData(list)
-      setFilterData(list)
-      }
-      catch(err){
-        console.log(err)
-      }
-    };
-    fetchData()
-  },[]);
-
-  useEffect(() => {
+    setFilterData(data)
    let active = filterData.filter(item => item.Status === "active");
       setActiveData(active);
       setSumActive(getArraySum(active))
@@ -53,7 +38,7 @@ const Home = () => {
       setClosedData(closed)
       setSumClosed(getArraySum(closed))
    
-  },[data,dateData])
+  },[data,dateData,filterData])
 
   const getArraySum = (arr) => {
     let sum = 0;
@@ -136,6 +121,7 @@ const Home = () => {
             <Widget type="revenueMissed" list={filterData} closedRevenue={sumClosed}/>
             <Widget type="revenueExpected" list={filterData} activeRevenue={sumActive}/>
          </div>
+         <CrmDashboard data={data}/>
          <div className={classes.listContainer}>
          <div className={classes.datatableTitle}>
          <div className={classes.listTitle}>Enquiries</div>

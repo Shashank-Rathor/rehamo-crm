@@ -3,46 +3,23 @@ import classes from './Datatable.module.css';
 import { DataGrid } from '@mui/x-data-grid';
 import {userColoumns, userRows} from '../../datatablsesource';
 import { Link } from 'react-router-dom';
-import { collection, getDocs,doc, deleteDoc } from "firebase/firestore";
-import { db } from "../../firebase";
 import Excelexport from '../../components/Excelexport';
+import { useContext } from "react";
+import { DataContext } from '../../components/context/DataContext';
 
 const Datatable = () => {
-  const [data,setData] = useState([]);
+  const {data} = useContext(DataContext);
+  const {handleDelete} = useContext(DataContext);
   const [filterData, setFilterData] = useState([]);
   const [startDate, setStartDate] = useState(" ");
   const [endDate, setEndDate] = useState(" ");
   const [dateData, setdateDate] = useState([]);
   
-  useEffect(() => {
-    const fetchData = async() => {
-      let list = []
-      try{
-        const querySnapshot = await getDocs(collection(db, "enquiries"));
-      querySnapshot.forEach((doc) => {
-        list.push({id: doc.id, ...doc.data()});
-      });
-      setData(list.reverse())
-      setFilterData(list)
-      }
-      catch(err){
-        console.log(err)
-      }
-    };
-    
-    fetchData()
-  },[]);
+  
 
-  const handleDelete = async(id) =>{
-      try{
-        console.log(id)
-        await deleteDoc(doc(db, "enquiries", id));
-        setData(data.filter((item) => item.id !== id))
-      }
-      catch(err){
-        console.log(err)
-      }
-  }
+  useEffect(() => {
+    setFilterData(data);
+  },[data])
 
   const handleFilter = (type) => {
 

@@ -6,46 +6,36 @@ import PersonIcon from '@mui/icons-material/Person';
 import Notifications from '../notifications/Notifications';
 import { AuthContext } from "../context/AuthContext";
 import { useContext } from "react";
-import { collection, getDocs,doc, deleteDoc } from "firebase/firestore";
-import { db } from "../../firebase";
-import { UndoRounded } from '@mui/icons-material';
+import { DataContext } from '../../components/context/DataContext';
 
 const Navbar = () => {
   const [name, setName] = useState([]);
-  const [data,setData] = useState([]);
   const [notifications,setNotifications] = useState([]);
   const [notificationCount,setNotificationCount] = useState("");
   const [isNotification,setIsNotification] = useState(false);
-  const {currentUser} = useContext(AuthContext)
+  const {currentUser} = useContext(AuthContext);
+  const {data} = useContext(DataContext);
 
 useEffect(() => {
 
   if (currentUser) {
    setName(currentUser.displayName);
   }
+  console.log(data)
+
   const today = new Date();
   const todayYear = today.getFullYear();
   const todayMonth = String(today.getMonth() + 1).padStart(2, '0');
   const todayDay = String(today.getDate()).padStart(2, '0');
-
-  const fetchData = async() => {
-    let list = []
+  
     let notificationList = [];
-    try{
-      const querySnapshot = await getDocs(collection(db, "enquiries"));
-    querySnapshot.forEach((doc) => {
-      list.push({id: doc.id, ...doc.data()});
-    });
-    setData(list)
-    list.map((item) => {
+    data.map((item) => {
       if(item.ReminderDate){
       var dateArray = item.ReminderDate.split("-");
       var day = dateArray[2].split("T")[0]
       var month = dateArray[1]
       var year = dateArray[0];
 
-      console.log(item.Crm)
-      console.log(currentUser)
 
       if(item.Crm === currentUser.displayName){
       if(day == todayDay && month == todayMonth && year == todayYear ){
@@ -59,14 +49,8 @@ useEffect(() => {
     })
     setNotifications(notificationList);
     setNotificationCount(notificationList.length);
-    }
-    catch(err){
-      console.log(err)
-    }
-  };
-  
-  fetchData();
-}, []);
+
+}, [data]);
 
   const handleNotification = () =>{
     setIsNotification(!isNotification)
