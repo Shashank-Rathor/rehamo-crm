@@ -5,20 +5,39 @@ import {userColoumns, userRows} from '../../datatablsesource';
 import { Link } from 'react-router-dom';
 import Excelexport from '../../components/Excelexport';
 import { useContext } from "react";
+import { AuthContext } from "../context/AuthContext";
 import { DataContext } from '../../components/context/DataContext';
 
 const Datatable = () => {
   const {data} = useContext(DataContext);
   const {handleDelete} = useContext(DataContext);
   const [filterData, setFilterData] = useState([]);
+  const [crmData, setCrmData] = useState([]);
   const [startDate, setStartDate] = useState(" ");
   const [endDate, setEndDate] = useState(" ");
   const [dateData, setdateDate] = useState([]);
-  
+  const [name, setName] = useState([]);
+  const {currentUser} = useContext(AuthContext);
   
 
   useEffect(() => {
-    setFilterData(data);
+
+    if (currentUser) {
+      setName(currentUser.displayName);
+     }
+      let crmList=[];
+
+      data.map((item) => {
+        if(item.Crm === currentUser.displayName){
+        crmList.push({...item})
+      }
+      else{
+        return
+      }
+      })
+
+      setFilterData(crmList)
+      setCrmData(crmList)
   },[data])
 
   const handleFilter = (type) => {
@@ -26,19 +45,19 @@ const Datatable = () => {
     if(dateData.length == 0){
 
     if(type == "active"){
-      let active = data.filter(item => item.Status === "active");
+      let active = crmData.filter(item => item.Status === "active");
       setFilterData(active)
     }
     else if(type == "sold"){
-      let sold = data.filter(item => item.Status === "sold");
+      let sold = crmData.filter(item => item.Status === "sold");
       setFilterData(sold)
     }
     else if(type == "closed"){
-      let closed = data.filter(item => item.Status === "closed");
+      let closed = crmData.filter(item => item.Status === "closed");
       setFilterData(closed)
     }
     else if(type == "all"){
-      setFilterData(data)
+      setFilterData(crmData)
     }      
   }
   else{
@@ -56,7 +75,7 @@ const Datatable = () => {
       setFilterData(closed)
     }
     else if(type == "all"){
-      setFilterData(data)
+      setFilterData(crmData)
     } 
   }
   }
@@ -69,7 +88,7 @@ const Datatable = () => {
   }
   const handleFilterDate = () => {
 
-    const dataInRange = data.filter(item => {
+    const dataInRange = crmData.filter(item => {
       const itemDate = new Date(item.Date);
       return itemDate >= new Date(startDate) && itemDate <= new Date(endDate);
     });

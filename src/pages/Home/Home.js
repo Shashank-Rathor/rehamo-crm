@@ -24,8 +24,10 @@ const Home = () => {
    const [sumClosed, setSumClosed] = useState("");
    const {data} = useContext(DataContext);
 
-  useEffect(() => {
+   useEffect(() => {
     setFilterData(data)
+   },[data])
+  useEffect(() => {
    let active = filterData.filter(item => item.Status === "active");
       setActiveData(active);
       setSumActive(getArraySum(active))
@@ -38,7 +40,7 @@ const Home = () => {
       setClosedData(closed)
       setSumClosed(getArraySum(closed))
    
-  },[data,dateData,filterData])
+  },[dateData,filterData])
 
   const getArraySum = (arr) => {
     let sum = 0;
@@ -121,7 +123,7 @@ const Home = () => {
             <Widget type="revenueMissed" list={filterData} closedRevenue={sumClosed}/>
             <Widget type="revenueExpected" list={filterData} activeRevenue={sumActive}/>
          </div>
-         <CrmDashboard data={data}/>
+         {/* <CrmDashboard data={data}/> */}
          <div className={classes.listContainer}>
          <div className={classes.datatableTitle}>
          <div className={classes.listTitle}>Enquiries</div>

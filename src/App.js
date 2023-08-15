@@ -2,7 +2,9 @@ import Home from "./pages/Home/Home";
 import Login from "./pages/Login/Login";
 import Signup from "./pages/Signup/Signup";
 import Enquiries from "./pages/Enquiries/Enquiries";
+import Users from "./pages/Users/Users";
 import Enquiry from "./pages/Enquiry/Enquiry";
+import NewUser from "./pages/NewUser/NewUser";
 
 import {
   BrowserRouter,
@@ -35,6 +37,8 @@ function App() {
         <Route exact path="/enquiry" element={<RequireAuth><Enquiry/></RequireAuth>}/> 
         <Route exact path="/enquiries/new" element={<RequireAuth><New/></RequireAuth>}/> 
         <Route exact path="enquiry/edit" element={<RequireAuth><Edit/></RequireAuth>}/> 
+        <Route exact path="/users" element={<RequireAuth><Users/></RequireAuth>}/> 
+        <Route exact path="/users/new" element={<RequireAuth><NewUser/></RequireAuth>}/> 
       </Routes>
     </BrowserRouter>
     </div>
