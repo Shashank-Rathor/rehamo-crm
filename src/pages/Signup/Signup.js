@@ -4,16 +4,29 @@ import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import {auth} from "../../firebase";
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../components/context/AuthContext';
+import { addDoc, collection } from "firebase/firestore"; 
+import { db } from '../../firebase';
 
 const Signup = () => {
     const [error,setError] = useState(false);
     const [name,setName] = useState("");
     const [email,setEmail] = useState("");
     const [password,setPassword] = useState("");
+    
 
     const navigate = useNavigate()
 
     const {dispatch} = useContext(AuthContext)
+
+    const getFormattedDate = () => {
+      const now = new Date();
+      const year = now.getFullYear();
+      const month = String(now.getMonth() + 1).padStart(2, '0');
+      const day = String(now.getDate()).padStart(2, '0');
+      const hours = String(now.getHours()).padStart(2, '0');
+      const minutes = String(now.getMinutes()).padStart(2, '0');
+      return `${year}-${month}-${day}T${hours}:${minutes}`;
+    };
 
     const handleSignup= (e) => {
         e.preventDefault();
@@ -30,12 +43,27 @@ const Signup = () => {
           })
           console.log(user)
           dispatch({type:"LOGIN", payload:user})
+          handleAdd();
           navigate("/login")
         })
         .catch((error) => {
           setError(true)
         });
     }
+    const handleAdd = async() => {
+      
+      try{
+          const res = await addDoc(collection(db, "users"), {
+                  Date: getFormattedDate(),
+                  Name: name,
+                  Email: email,
+                  Role: "crm",
+            })
+      }
+      catch(err){
+          console.log(err)
+      }
+  }
 
   return (
     <div className={classes.login}>

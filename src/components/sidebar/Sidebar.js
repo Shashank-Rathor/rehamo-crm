@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext, useEffect} from 'react';
 import classes from './Sidebar.module.css';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import ListIcon from '@mui/icons-material/List';
@@ -8,10 +8,15 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { Link, useNavigate } from 'react-router-dom';
 import { signOut } from 'firebase/auth';
 import {auth} from "../../firebase";
+import { AuthContext } from '../../components/context/AuthContext';
+import { DataContext } from '../../components/context/DataContext';
 
 const Sidebar = () => {
+  const {currentUser} = useContext(AuthContext);
+  const {users} = useContext(DataContext);
 
   const navigate = useNavigate();
+  
 
   const handleLogout = () => {               
     signOut(auth).then(() => {

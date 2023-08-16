@@ -6,8 +6,6 @@ import { useState,useEffect } from 'react';
 import { addDoc, collection, doc, setDoc,updateDoc,getDoc,get  } from "firebase/firestore"; 
 import { db } from '../../firebase';
 import { useNavigate } from 'react-router-dom';
-import Modal from '../../components/modal/Modal';
-import AddBoxIcon from '@mui/icons-material/AddBox';
 
 const Edit = () => {
     

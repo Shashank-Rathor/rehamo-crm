@@ -1,13 +1,13 @@
 import React from 'react';
-import classes from './NewUser.module.css';
+import classes from './EditUser.module.css';
 import Sidebar from '../../components/sidebar/Sidebar';
 import Navbar from '../../components/navbar/Navbar';
 import { useState,useEffect } from 'react';
-import { addDoc, collection } from "firebase/firestore"; 
+import { addDoc, collection, doc, setDoc,getDoc,updateDoc  } from "firebase/firestore"; 
 import { db } from '../../firebase';
 import { useNavigate } from 'react-router-dom';
 
-const New = () => {
+const EditUser = () => {
     
     const navigate = useNavigate();
     
@@ -18,24 +18,39 @@ const New = () => {
         email:'',
         role: '',
     });
+    const [userId, setUserId] = useState("");
+    var id='';
 
-    const getFormattedDate = () => {
-        const now = new Date();
-        const year = now.getFullYear();
-        const month = String(now.getMonth() + 1).padStart(2, '0');
-        const day = String(now.getDate()).padStart(2, '0');
-        const hours = String(now.getHours()).padStart(2, '0');
-        const minutes = String(now.getMinutes()).padStart(2, '0');
-        return `${year}-${month}-${day}T${hours}:${minutes}`;
-      };
 
     useEffect(() => {
 
-        const user = JSON.parse(localStorage.getItem('user'));
-        if (user) {
-            console.log(user)
-        }
-        setFormData({date: getFormattedDate()})
+        const fetchData =  () => {
+            var mainurl = document.location.href,
+            params = mainurl.split('?')[1].split('&'),
+            data = {},
+            tmp
+          for (var i = 0, l = params.length; i < l; i++) {
+            tmp = params[i].split('=')
+            data[tmp[0]] = tmp[1]
+          }
+          id = data.id
+          setUserId(id)
+          
+          const docRef = doc(db, "users", id);
+           
+          return getDoc(docRef)
+          .then((res) =>{
+            if(res){
+                setFormData({
+                    name: res.data().Name,
+                    date: res.data().Date,
+                    email: res.data().Email,
+                    role: res.data().Role,
+                })
+            }
+          })
+          }
+          fetchData();
 
       },[]);
 
@@ -58,15 +73,15 @@ const New = () => {
         if(formData.date && formData.name )
         {
         try{
-            const res = await addDoc(collection(db, "users"), {
-                    Date: formData.date,
-                    Name: formData.name,
-                    Email: formData.email,
-                    Role: formData.role,
-              })
-              .then(()=>{
-                navigate("/users")
-              })
+            const res = await updateDoc(doc(db, "users",userId), {
+                Date: formData.date,
+                Name: formData.name,
+                Email: formData.email,
+                Role: formData.role,
+          })
+          .then(()=>{
+            navigate("/users")
+          })
         }
         catch(err){
             console.log(err)
@@ -95,7 +110,7 @@ const New = () => {
                         placeholder='date'
                         required
                         value={formData.date}
-                        onChange={handleInput}
+                        disabled
                         />
                     </div>
                     <div className={classes.formInput}>
@@ -105,7 +120,7 @@ const New = () => {
                         type="text" 
                         placeholder='name'
                         value={formData.name}
-                        onChange={handleInput}
+                        disabled
                         />
                     </div>
                     <div className={classes.formInput}>
@@ -114,8 +129,7 @@ const New = () => {
                         id="email" 
                         type="email" 
                         placeholder='email'
-                        value={formData.email}
-                        onChange={handleInput}
+                        disabled
                         />
                     </div>
                     <div className={classes.formInput}>
@@ -139,4 +153,4 @@ const New = () => {
   )
 }
 
-export default New
+export default EditUser

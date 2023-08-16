@@ -16,6 +16,7 @@ import New from "./pages/new/New";
 import Edit from "./pages/Edit/Edit";
 import { AuthContext } from "./components/context/AuthContext";
 import { useContext } from "react";
+import EditUser from "./pages/EditUser/EditUser";
 
 function App() {
 
@@ -39,6 +40,8 @@ function App() {
         <Route exact path="enquiry/edit" element={<RequireAuth><Edit/></RequireAuth>}/> 
         <Route exact path="/users" element={<RequireAuth><Users/></RequireAuth>}/> 
         <Route exact path="/users/new" element={<RequireAuth><NewUser/></RequireAuth>}/> 
+        <Route exact path="users/edit" element={<RequireAuth><EditUser/></RequireAuth>}/> 
+
       </Routes>
     </BrowserRouter>
     </div>
