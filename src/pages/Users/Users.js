@@ -13,9 +13,6 @@ const Enquiries = () => {
   const {currentUser} = useContext(AuthContext);
   const {users,isAdmin} = useContext(DataContext);
 
-  useEffect(() => {
-    console.log(isAdmin)
-  },[users])
 
   const handleDelete = async(id) => {
 

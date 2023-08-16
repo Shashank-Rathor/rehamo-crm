@@ -108,7 +108,7 @@ const Datatable = () => {
             <Link to={`/enquiry?id=${params.row.ID}`}style={{textDecoration:"none"}}>
             <div className={classes.viewButton}>View</div>
             </Link>
-              <div className={classes.deleteButton} onClick={() => handleDelete(params.row.ID)}>Delete</div>
+              {/* <div className={classes.deleteButton} onClick={() => handleDelete(params.row.ID)}>Delete</div> */}
           </div>
         )
       }

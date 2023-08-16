@@ -1,4 +1,4 @@
-import React, {useContext, useEffect} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import classes from './Sidebar.module.css';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import ListIcon from '@mui/icons-material/List';
@@ -14,9 +14,20 @@ import { DataContext } from '../../components/context/DataContext';
 const Sidebar = () => {
   const {currentUser} = useContext(AuthContext);
   const {users} = useContext(DataContext);
+  const [admin,setAdmin] = useState(false)
 
   const navigate = useNavigate();
   
+
+  useEffect(() => {
+    const userName = JSON.parse(localStorage.getItem('user'));
+    const foundObject = users.find(obj => obj.Name === userName.displayName);
+    if(foundObject){
+      if(foundObject.Role === "admin"){
+        setAdmin(true)
+      }
+    }
+  },[users])
 
   const handleLogout = () => {               
     signOut(auth).then(() => {
@@ -46,18 +57,18 @@ const Sidebar = () => {
                 </li>
                 </Link>
                 <p className={classes.title}>LISTS</p>
-                <Link to="/enquiries" style={{textDecoration:"none"}}>
+                {admin === false ? <Link to="/enquiries" style={{textDecoration:"none"}}>
                 <li>
                   <ListIcon className={classes.icon}/>
                   <span>Enquiries</span>
                 </li> 
-                  </Link>
-                  <Link to="/users" style={{textDecoration:"none"}}>
+                  </Link>:<></>}
+                  {admin === true ? <Link to="/users" style={{textDecoration:"none"}}>
                 <li>
                   <GroupIcon className={classes.icon}/>
                  <span>Users</span> 
                 </li>   
-                </Link> 
+                </Link>:<></> }
                 <p className={classes.title}>USER</p>
                 <li>
                   <AccountCircleIcon className={classes.icon}/>
