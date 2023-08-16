@@ -14,7 +14,7 @@ import { DataContext } from '../../components/context/DataContext';
 const Sidebar = () => {
   const {currentUser} = useContext(AuthContext);
   const {users} = useContext(DataContext);
-  const [admin,setAdmin] = useState(false)
+  const [admin,setAdmin] = useState("")
 
   const navigate = useNavigate();
   
@@ -25,6 +25,9 @@ const Sidebar = () => {
     if(foundObject){
       if(foundObject.Role === "admin"){
         setAdmin(true)
+      }
+      else{
+        setAdmin(false)
       }
     }
   },[users])
