@@ -8,7 +8,6 @@ export class DataProvider extends Component {
     state = {
         data: [],
         users: [],
-        isAdmin:"",
     };
 
     async fetch (){
@@ -19,6 +18,7 @@ export class DataProvider extends Component {
         list.push({id: doc.id, ...doc.data()});
       });
       this.setState({data: list})
+      console.log(list)
       }
       catch(err){
         console.log(err)
@@ -72,12 +72,12 @@ export class DataProvider extends Component {
     }
 
     render(){
-        const {data,users,isAdmin} = this.state;
+        const {data,users} = this.state;
         const {handleDelete,checkAdmin} = this;
         return (
 
             <DataContext.Provider 
-            value={{data,users,isAdmin,checkAdmin,handleDelete}}>
+            value={{data,users,checkAdmin,handleDelete}}>
                 {this.props.children}
             </DataContext.Provider>
         )

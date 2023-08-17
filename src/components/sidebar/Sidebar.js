@@ -13,14 +13,14 @@ import { DataContext } from '../../components/context/DataContext';
 
 const Sidebar = () => {
   const {currentUser} = useContext(AuthContext);
-  const {users,isAdmin,checkAdmin} = useContext(DataContext);
+  const {users,checkAdmin} = useContext(DataContext);
   const [admin,setAdmin] = useState("")
 
   const navigate = useNavigate();
   
 useEffect(() => {
     setAdmin(checkAdmin(users))
-},[users])
+},[currentUser,users])
 
 
   const handleLogout = () => {               

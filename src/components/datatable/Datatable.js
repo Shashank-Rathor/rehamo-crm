@@ -18,6 +18,7 @@ const Datatable = () => {
   const [dateData, setdateDate] = useState([]);
   const [name, setName] = useState([]);
   const {currentUser} = useContext(AuthContext);
+  const [selectedRows, setSelectedRows] = useState([]);
   
 
   useEffect(() => {
@@ -39,6 +40,11 @@ const Datatable = () => {
       setFilterData(crmList)
       setCrmData(crmList)
   },[data])
+
+  const handleSelectionChange = (selection) => {
+    // setSelectedRows(selection.selectionModel);
+    console.log(selection.selectionModel)
+  };
 
   const handleFilter = (type) => {
 
@@ -147,6 +153,8 @@ const Datatable = () => {
         }}
         pageSizeOptions={[5, 10]}
         checkboxSelection
+        onSelectionModelChange={itm => console.log(itm)}
+        // selectionModel={selectedRows}
       />
     </div>
   )

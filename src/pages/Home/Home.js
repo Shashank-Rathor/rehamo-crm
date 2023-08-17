@@ -9,6 +9,7 @@ import { db } from "../../firebase";
 import CrmDashboard from '../../components/crmDashboard/CrmDashboard';
 import { useContext } from "react";
 import { DataContext } from '../../components/context/DataContext';
+import Excelexport from '../../components/Excelexport';
 
 
 const Home = () => {
@@ -140,7 +141,9 @@ const Home = () => {
             <input type="date" id="endDate" value={endDate} onChange={(e) => handleEndDate(e)}/>
             </div>
             <div className={classes.link} onClick={() => handleFilterDate()}>FIlter</div>
+            <Excelexport className={classes.link} data={filterData}/>
          </div> 
+        
             <Table data={filterData} />
          </div>
       </div>

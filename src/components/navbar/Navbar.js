@@ -21,7 +21,6 @@ useEffect(() => {
   if (currentUser) {
    setName(currentUser.displayName);
   }
-  console.log(data)
 
   const today = new Date();
   const todayYear = today.getFullYear();
