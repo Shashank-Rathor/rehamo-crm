@@ -13,28 +13,19 @@ import { DataContext } from '../../components/context/DataContext';
 
 const Sidebar = () => {
   const {currentUser} = useContext(AuthContext);
-  const {users} = useContext(DataContext);
+  const {users,isAdmin,checkAdmin} = useContext(DataContext);
   const [admin,setAdmin] = useState("")
 
   const navigate = useNavigate();
   
+useEffect(() => {
+    setAdmin(checkAdmin(users))
+},[users])
 
-  useEffect(() => {
-    const userName = JSON.parse(localStorage.getItem('user'));
-    const foundObject = users.find(obj => obj.Name === userName.displayName);
-    if(foundObject){
-      if(foundObject.Role === "admin"){
-        setAdmin(true)
-      }
-      else{
-        setAdmin(false)
-      }
-    }
-  },[currentUser,users])
 
   const handleLogout = () => {               
     signOut(auth).then(() => {
-    // Sign-out successful.
+    // Sign-out successful. 
         localStorage.setItem("user", JSON.stringify(""))
         navigate("/login");
         console.log("Signed out successfully")
