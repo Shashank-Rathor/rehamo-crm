@@ -30,7 +30,7 @@ const Sidebar = () => {
         setAdmin(false)
       }
     }
-  },[users])
+  },[currentUser,users])
 
   const handleLogout = () => {               
     signOut(auth).then(() => {
