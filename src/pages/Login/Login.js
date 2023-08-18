@@ -4,11 +4,13 @@ import { signInWithEmailAndPassword  } from "firebase/auth";
 import {auth} from "../../firebase";
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../components/context/AuthContext';
+import { DataContext } from '../../components/context/DataContext';
 
 const Login = () => {
     const [error,setError] = useState(false);
     const [email,setEmail] = useState("");
     const [password,setPassword] = useState("");
+    const {checkAdmin} = useContext(DataContext);
 
     const navigate = useNavigate()
 
@@ -23,6 +25,7 @@ const Login = () => {
           const user = userCredential.user;
           console.log(user)
           dispatch({type:"LOGIN", payload:user})
+          checkAdmin(email)
           navigate("/")
         })
         .catch((error) => {

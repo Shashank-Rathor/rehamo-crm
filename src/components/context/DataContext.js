@@ -8,6 +8,7 @@ export class DataProvider extends Component {
     state = {
         data: [],
         users: [],
+        isAdmin: JSON.parse(localStorage.getItem("Admin")) 
     };
 
     async fetch (){
@@ -18,7 +19,7 @@ export class DataProvider extends Component {
         list.push({id: doc.id, ...doc.data()});
       });
       this.setState({data: list})
-      console.log(list)
+      
       }
       catch(err){
         console.log(err)
@@ -34,21 +35,24 @@ export class DataProvider extends Component {
         list.push({id: doc.id, ...doc.data()});
       });
       this.setState({users: list})
+      console.log(list) 
     }
       catch(err){
         console.log(err)
       }
     }
 
-     checkAdmin = (list) => {
-      const userName = JSON.parse(localStorage.getItem('user'));
-      const foundObject = list.find(obj => obj.Name === userName.displayName);
+     checkAdmin = (email) => {
+      const foundObject = this.state.users.find(obj => obj.Email === email);
       if(foundObject){
       if(foundObject.Role === "admin"){
-        return true
+        this.setState({isAdmin: true})
+        localStorage.setItem("Admin", JSON.stringify(true))
       }
       else{
-        return false
+        this.setState({isAdmin: false})
+        localStorage.setItem("Admin", JSON.stringify(false))
+
       }
     }
     }
@@ -72,12 +76,12 @@ export class DataProvider extends Component {
     }
 
     render(){
-        const {data,users} = this.state;
+        const {data,users,isAdmin} = this.state;
         const {handleDelete,checkAdmin} = this;
         return (
 
             <DataContext.Provider 
-            value={{data,users,checkAdmin,handleDelete}}>
+            value={{data,users,checkAdmin,isAdmin,handleDelete}}>
                 {this.props.children}
             </DataContext.Provider>
         )

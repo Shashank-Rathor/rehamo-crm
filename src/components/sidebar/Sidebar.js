@@ -13,14 +13,12 @@ import { DataContext } from '../../components/context/DataContext';
 
 const Sidebar = () => {
   const {currentUser} = useContext(AuthContext);
-  const {users,checkAdmin} = useContext(DataContext);
+  const {users,isAdmin} = useContext(DataContext);
   const [admin,setAdmin] = useState("")
 
   const navigate = useNavigate();
   
-useEffect(() => {
-    setAdmin(checkAdmin(users))
-},[currentUser,users])
+
 
 
   const handleLogout = () => {               
@@ -51,13 +49,13 @@ useEffect(() => {
                 </li>
                 </Link>
                 <p className={classes.title}>LISTS</p>
-                {admin === false ? <Link to="/enquiries" style={{textDecoration:"none"}}>
+                {isAdmin === false ? <Link to="/enquiries" style={{textDecoration:"none"}}>
                 <li>
                   <ListIcon className={classes.icon}/>
                   <span>Enquiries</span>
                 </li> 
                   </Link>:<></>}
-                  {admin === true ? <Link to="/users" style={{textDecoration:"none"}}>
+                  {isAdmin === true ? <Link to="/users" style={{textDecoration:"none"}}>
                 <li>
                   <GroupIcon className={classes.icon}/>
                  <span>Users</span> 
