@@ -8,6 +8,7 @@ import { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { DataContext } from '../../components/context/DataContext';
 import { useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const Datatable = () => {
   const {data} = useContext(DataContext);
@@ -22,6 +23,7 @@ const Datatable = () => {
   const [selectedRows, setSelectedRows] = useState([]);
   
   const yourParameter = useParams();
+  const navigate = useNavigate();
 
   useEffect(() => {
 
@@ -47,6 +49,12 @@ const Datatable = () => {
     // setSelectedRows(selection.selectionModel);
     console.log(selection.selectionModel)
   };
+
+  const handleCellClick = (params) => {
+
+    console.log(params.row.id)
+    navigate(`/enquiry?id=${params.row.id}`)
+  }
 
   const handleFilter = (type) => {
 
@@ -154,6 +162,7 @@ const Datatable = () => {
           },
         }}
         pageSizeOptions={[5, 10]}
+        onRowClick={(params) => handleCellClick(params)}
         checkboxSelection
         onSelectionModelChange={itm => console.log(itm)}
         // selectionModel={selectedRows}
