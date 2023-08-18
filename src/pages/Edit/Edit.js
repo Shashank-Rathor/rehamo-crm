@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useContext} from 'react';
 import classes from './Edit.module.css';
 import Sidebar from '../../components/sidebar/Sidebar';
 import Navbar from '../../components/navbar/Navbar';
@@ -6,10 +6,12 @@ import { useState,useEffect } from 'react';
 import { addDoc, collection, doc, setDoc,updateDoc,getDoc,get  } from "firebase/firestore"; 
 import { db } from '../../firebase';
 import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../components/context/AuthContext';
 
 const Edit = () => {
     
     const navigate = useNavigate();
+    const {currentUser} = useContext(AuthContext);
     
     const [formData, setFormData] = useState({
         id:'',
@@ -112,7 +114,7 @@ const Edit = () => {
                     ReminderDate: formData.reminderDate || null,
               })
               .then(()=>{
-                navigate("/enquiries")
+                navigate(`/enquiries/${currentUser.displayName}`)
               })
         }
         catch(err){

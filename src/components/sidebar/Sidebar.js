@@ -48,23 +48,42 @@ const Sidebar = () => {
                   <span>Dashboard</span>
                 </li>
                 </Link>
+                
+                {isAdmin === false ? 
+                <>
                 <p className={classes.title}>LISTS</p>
-                {isAdmin === false ? <Link to="/enquiries" style={{textDecoration:"none"}}>
+                <a href={`/enquiries/${currentUser.displayName}`} style={{textDecoration:"none"}}>
                 <li>
                   <ListIcon className={classes.icon}/>
                   <span>Enquiries</span>
                 </li> 
-                  </Link>:<></>}
-                  {isAdmin === true ? <Link to="/users" style={{textDecoration:"none"}}>
+                  </a> </>:<></>}
+                  {isAdmin === true ? 
+                  <>
+                  <p className={classes.title}>ENQUIRIES</p>
+                  <a  href="/enquiries/Vicky" style={{textDecoration:"none"}}>
+                <li>
+                  <ListIcon className={classes.icon}/>
+                  <span>Vicky</span>
+                </li> 
+                  </a>
+                  <a href="/enquiries/Ramya" style={{textDecoration:"none"}}>
+                <li>
+                  <ListIcon className={classes.icon}/>
+                  <span>Ramya</span>
+                </li> 
+                  </a>
+                  <p className={classes.title}>LISTS</p>
+                  <Link to="/users" style={{textDecoration:"none"}}>
                 <li>
                   <GroupIcon className={classes.icon}/>
                  <span>Users</span> 
                 </li>   
-                </Link>:<></> }
+                </Link></>:<></> }
                 <p className={classes.title}>USER</p>
                 <li>
                   <AccountCircleIcon className={classes.icon}/>
-                  <span>Profile</span>
+                  <span>{currentUser.displayName}</span>
                 </li>   
                 <li onClick={()=>handleLogout()}>
                   <LogoutIcon className={classes.icon}/>

@@ -5,7 +5,6 @@ import Navbar from '../../components/navbar/Navbar';
 import { useState,useEffect } from 'react';
 import { addDoc, collection, doc, serverTimestamp, setDoc,getDocs,updateDoc  } from "firebase/firestore"; 
 import { db } from '../../firebase';
-import AddBoxIcon from '@mui/icons-material/AddBox';
 import { useNavigate } from 'react-router-dom';
 import Modal from '../../components/modal/Modal';
 
@@ -121,7 +120,7 @@ const New = () => {
                     
               })
               .then(()=>{
-                navigate("/enquiries")
+                navigate(`/enquiries/${formData.crm}`)
                 const enquiryRef = doc(db, "enquiryid", "T6k1a5DIQ6JLml1SKpCc");
 
                 const docRef = updateDoc(enquiryRef, {

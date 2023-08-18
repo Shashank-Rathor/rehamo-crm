@@ -34,7 +34,7 @@ function App() {
         <Route exact path="/" element={<RequireAuth><Home/></RequireAuth>}/> 
         <Route exact path="/login" element={<Login/>}/> 
         <Route exact path="/signup" element={<Signup/>}/> 
-        <Route exact path="/enquiries" element={<RequireAuth><Enquiries/></RequireAuth>}/> 
+        <Route exact path="/enquiries/:name" element={<RequireAuth><Enquiries/></RequireAuth>}/> 
         <Route exact path="/enquiry" element={<RequireAuth><Enquiry/></RequireAuth>}/> 
         <Route exact path="/enquiries/new" element={<RequireAuth><New/></RequireAuth>}/> 
         <Route exact path="enquiry/edit" element={<RequireAuth><Edit/></RequireAuth>}/> 

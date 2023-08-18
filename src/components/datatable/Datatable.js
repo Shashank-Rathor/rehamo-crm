@@ -7,6 +7,7 @@ import Excelexport from '../../components/Excelexport';
 import { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { DataContext } from '../../components/context/DataContext';
+import { useParams } from 'react-router-dom';
 
 const Datatable = () => {
   const {data} = useContext(DataContext);
@@ -20,6 +21,7 @@ const Datatable = () => {
   const {currentUser} = useContext(AuthContext);
   const [selectedRows, setSelectedRows] = useState([]);
   
+  const yourParameter = useParams();
 
   useEffect(() => {
 
@@ -29,7 +31,7 @@ const Datatable = () => {
       let crmList=[];
 
       data.map((item) => {
-        if(item.Crm === currentUser.displayName){
+        if(item.Crm === yourParameter.name){
         crmList.push({...item})
       }
       else{
