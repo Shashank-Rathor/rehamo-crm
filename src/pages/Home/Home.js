@@ -4,12 +4,11 @@ import Sidebar from '../../components/sidebar/Sidebar';
 import Navbar from '../../components/navbar/Navbar';
 import Widget from '../../components/widget/Widget';
 import Table from '../../components/table/Table';
-import { collection, getDocs } from "firebase/firestore";
-import { db } from "../../firebase";
 import CrmDashboard from '../../components/crmDashboard/CrmDashboard';
 import { useContext } from "react";
 import { DataContext } from '../../components/context/DataContext';
 import Excelexport from '../../components/Excelexport';
+import SearchIcon from '@mui/icons-material/Search';
 
 
 const Home = () => {
@@ -24,6 +23,7 @@ const Home = () => {
    const [sumSold, setSumSold] = useState("");
    const [sumClosed, setSumClosed] = useState("");
    const {data} = useContext(DataContext);
+   const [searchInput, setSearchInput] = useState('');
 
    useEffect(() => {
     setFilterData(data)
@@ -52,6 +52,17 @@ const Home = () => {
     
     return sum;
   }
+  const handleSearch = (e) => {
+    const searchTerm = e.target.value.toLowerCase();
+    const filteredResults = data.filter((item) =>
+      Object.values(item).some((value) =>
+        value !== null &&
+        value.toString().toLowerCase().includes(searchTerm)
+      )
+    );
+    setFilterData(filteredResults);
+    setSearchInput(searchTerm);
+  };
 
   const handleStartDate = (e) => {
    setStartDate(e.target.value);
@@ -126,6 +137,10 @@ const Home = () => {
          </div>
          {/* <CrmDashboard data={data}/> */}
          <div className={classes.listContainer}>
+         <div className={classes.search}>
+          <input type="text" placeholder='Search' value={searchInput} onChange={(e) => handleSearch(e)}/>
+          <SearchIcon/>
+        </div>
          <div className={classes.datatableTitle}>
          <div className={classes.listTitle}>Enquiries</div>
          <div className={classes.filterLink} onClick={() => handleFilter("all")}>All</div>

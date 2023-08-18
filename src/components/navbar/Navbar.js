@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import classes from './Navbar.module.css';
-import SearchIcon from '@mui/icons-material/Search';
+
 import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
 import PersonIcon from '@mui/icons-material/Person';
 import Notifications from '../notifications/Notifications';
@@ -58,10 +58,7 @@ useEffect(() => {
   return (
     <div className={classes.navbar}>
       <div className={classes.wrapper}>
-        <div className={classes.search}>
-          <input type="text" placeholder='Search'/>
-          <SearchIcon/>
-        </div>
+        <div />
         <div className={classes.items}>
             <div className={classes.item}>
               <NotificationsNoneIcon className={classes.icon} onClick={() => handleNotification()}/>

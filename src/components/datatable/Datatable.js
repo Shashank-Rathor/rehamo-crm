@@ -9,6 +9,7 @@ import { AuthContext } from "../context/AuthContext";
 import { DataContext } from '../../components/context/DataContext';
 import { useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import SearchIcon from '@mui/icons-material/Search';
 
 const Datatable = () => {
   const {data} = useContext(DataContext);
@@ -21,6 +22,7 @@ const Datatable = () => {
   const [name, setName] = useState([]);
   const {currentUser} = useContext(AuthContext);
   const [selectedRows, setSelectedRows] = useState([]);
+  const [searchInput, setSearchInput] = useState('');
   
   const yourParameter = useParams();
   const navigate = useNavigate();
@@ -50,6 +52,17 @@ const Datatable = () => {
     console.log(selection.selectionModel)
   };
 
+  const handleSearch = (e) => {
+    const searchTerm = e.target.value.toLowerCase();
+    const filteredResults = data.filter((item) =>
+      Object.values(item).some((value) =>
+        value !== null &&
+        value.toString().toLowerCase().includes(searchTerm)
+      )
+    );
+    setFilterData(filteredResults);
+    setSearchInput(searchTerm);
+  };
   const handleCellClick = (params) => {
 
     console.log(params.row.id)
@@ -133,6 +146,11 @@ const Datatable = () => {
 
   return (
     <div className={classes.datatable}>
+      
+      <div className={classes.search}>
+          <input type="text" placeholder='Search' value={searchInput} onChange={(e) => handleSearch(e)}/>
+          <SearchIcon/>
+        </div>
         <div className={classes.datatableTitle}>
         <Link to="/enquiries/new" style={{textDecoration: "none"}} className={classes.link}>
           Add New

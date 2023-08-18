@@ -78,6 +78,12 @@ const [dataArray, setDataArray] = useState([]);
                       <span className={classes.itemKey}>Address: <span>{data.Address}</span></span>
                     </div>
                     <div className={classes.detailItem}>
+                      <span className={classes.itemKey}>City: <span>{data.City}</span></span>
+                    </div>
+                    <div className={classes.detailItem}>
+                      <span className={classes.itemKey}>Pincode: <span>{data.Pincode}</span></span>
+                    </div>
+                    <div className={classes.detailItem}>
                       <span className={classes.itemKey}>Contact: <span>{data.Contact}</span></span>
                     </div>
                     <div className={classes.detailItem}>
@@ -104,7 +110,7 @@ const [dataArray, setDataArray] = useState([]);
                         <ul style={{paddingLeft: "5px"}}>
                          {dataArray.map((data, index) => (
                             <li key={index} className={classes.itemValue} >
-                             <b>Date: </b> {data.input1}, <b>Remarks:</b> {data.input2}
+                             <b>Date: </b> {data.input1},  <b>CRM:</b>{data.input3}, <b>Remarks:</b> {data.input2}
                             </li>
                          ))}
                         </ul>

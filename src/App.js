@@ -5,6 +5,7 @@ import Enquiries from "./pages/Enquiries/Enquiries";
 import Users from "./pages/Users/Users";
 import Enquiry from "./pages/Enquiry/Enquiry";
 import NewUser from "./pages/NewUser/NewUser";
+import AddOld from "./pages/AddOld/AddOld";
 
 import {
   BrowserRouter,
@@ -41,6 +42,7 @@ function App() {
         <Route exact path="/users" element={<RequireAuth><Users/></RequireAuth>}/> 
         <Route exact path="/users/new" element={<RequireAuth><NewUser/></RequireAuth>}/> 
         <Route exact path="users/edit" element={<RequireAuth><EditUser/></RequireAuth>}/> 
+        <Route exact path="enquiries/add" element={<RequireAuth><AddOld/></RequireAuth>}/> 
 
       </Routes>
     </BrowserRouter>

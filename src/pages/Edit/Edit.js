@@ -22,6 +22,8 @@ const Edit = () => {
         enquirytype:'',
         name: '',
         address: '',
+        city: '',
+        pincode: '',
         contact: '',
         email:'',
         product: '',
@@ -63,6 +65,8 @@ const Edit = () => {
                     source: res.data().Source,
                     enquirytype: res.data().EnquiryType,
                     address: res.data().Address,
+                    city: res.data().City,
+                    pincode: res.data().Pincode,
                     contact: res.data().Contact,
                     email: res.data().Email,
                     product: res.data().Product,
@@ -104,6 +108,8 @@ const Edit = () => {
                     EnquiryType: formData.enquirytype,
                     Name: formData.name,
                     Address: formData.address,
+                    City: formData.city,
+                    Pincode: formData.pincode,
                     Contact: formData.contact,
                     Email: formData.email,
                     Product: formData.product,
@@ -222,6 +228,26 @@ const Edit = () => {
                         />
                     </div>
                     <div className={classes.formInput}>
+                        <label>City</label>
+                        <input 
+                        id="city" 
+                        type="text" 
+                        placeholder='city'
+                        value={formData.city}
+                        onChange={handleInput}
+                        />
+                    </div>
+                    <div className={classes.formInput}>
+                        <label>Pincode</label>
+                        <input 
+                        id="pincode" 
+                        type="number" 
+                        placeholder='pincode'
+                        value={formData.pincode}
+                        onChange={handleInput}
+                        />
+                    </div>
+                    <div className={classes.formInput}>
                         <label>Contact</label>
                         <input 
                         id="contact" 
@@ -308,11 +334,12 @@ const Edit = () => {
                         <ul style={{paddingLeft: "0px",marginTop: "10px"}}>
                          {dataArray.map((data, index) => (
                             <li key={index}>
-                             <b>Date: </b> {data.input1}, <b>Remarks:</b> {data.input2}
+                             <b>Date: </b> {data.input1}, <b>CRM:</b>{data.input3}, <b>Remarks:</b> {data.input2}
                             </li>
                          ))}
                         </ul>
                         <input id="RemarksDate" className={classes.remarksInput} type="datetime-local"  hidden value={formData.date} placeholder="date"/>
+                        <input id="CRM" className={classes.remarksInput} type="text"  hidden value={formData.crm} placeholder="date"/>
                         <textarea id="Remark" className={classes.remarksInput} type="textArea" rows="4" cols="50" placeholder="remarks" value={inputValue2} onChange={handleInputChange2}/>
                         <div className={classes.remarksButton} onClick={handleRemarkSubmit}>Add</div>
                     </div> 

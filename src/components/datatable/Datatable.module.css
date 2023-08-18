@@ -68,3 +68,19 @@
 .filterDate{
     font-size: 15px;
 }
+.search{
+    display: flex;
+    align-items: center;
+    border: 0.5px solid lightgray;
+    padding: 3px;
+    width: 20%;
+}
+.search input{
+    border: none;
+    outline: none;
+    background-color: transparent;
+
+    &:placeholder{
+        font-size: 12px;
+    }
+}

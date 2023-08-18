@@ -21,6 +21,8 @@ const New = () => {
         enquirytype:'',
         name: '',
         address: '',
+        city:'',
+        pincode:'',
         contact: '',
         email:'',
         product: '',
@@ -109,6 +111,8 @@ const New = () => {
                     EnquiryType: formData.enquirytype,
                     Name: formData.name,
                     Address: formData.address,
+                    City: formData.city,
+                    Pincode: formData.pincode,
                     Contact: formData.contact,
                     Email: formData.email,
                     Product: formData.product,
@@ -145,7 +149,7 @@ const New = () => {
       };
 
       const handleRemarkSubmit = () => {
-        handleDataSubmit({ input1: formData.date, input2: inputValue2 });
+        handleDataSubmit({ input1: formData.date, input2: inputValue2, input3: formData.crm });
         setInputValue2('');
       };
 
@@ -236,6 +240,26 @@ const New = () => {
                         />
                     </div>
                     <div className={classes.formInput}>
+                        <label>City</label>
+                        <input 
+                        id="city" 
+                        type="text" 
+                        placeholder='city'
+                        value={formData.city}
+                        onChange={handleInput}
+                        />
+                    </div>
+                    <div className={classes.formInput}>
+                        <label>Pincode</label>
+                        <input 
+                        id="pincode" 
+                        type="number" 
+                        placeholder='pincode'
+                        value={formData.pincode}
+                        onChange={handleInput}
+                        />
+                    </div>
+                    <div className={classes.formInput}>
                         <label>Contact</label>
                         <input 
                         id="contact" 
@@ -322,11 +346,12 @@ const New = () => {
                         <ul style={{padding: "0"}}>
                          {dataArray.map((data, index) => (
                             <li key={index}>
-                             <b>Date: </b> {data.input1}, <b>Remarks:</b> {data.input2}
+                             <b>Date: </b> {data.input1}, <b>CRM:</b>{data.input3}, <b>Remarks:</b> {data.input2}
                             </li>
                          ))}
                         </ul>
                         <input id="RemarksDate" className={classes.remarksInput} type="datetime-local"  hidden value={formData.date} placeholder="date"/>
+                        <input id="CRM" className={classes.remarksInput} type="text"  hidden value={formData.crm} placeholder="date"/>
                         <textarea id="Remark" className={classes.remarksInput} type="textArea" rows="5" cols="50"   placeholder="remarks" value={inputValue2} onChange={handleInputChange2}/>
                         <div className={classes.remarksButton} onClick={handleRemarkSubmit}>Add</div>
                     </div>  
