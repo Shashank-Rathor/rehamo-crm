@@ -134,7 +134,17 @@ const Edit = () => {
       };
 
       const handleRemarkSubmit = () => {
-        handleDataSubmit({ input1: formData.date, input2: inputValue2 });
+        const getFormattedDate = () => {
+            const now = new Date();
+            const year = now.getFullYear();
+            const month = String(now.getMonth() + 1).padStart(2, '0');
+            const day = String(now.getDate()).padStart(2, '0');
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            return `${year}-${month}-${day}T${hours}:${minutes}`;
+          };
+
+        handleDataSubmit({ input1: getFormattedDate(), input2: inputValue2, input3: formData.crm });
         setInputValue2('');
       };
 
@@ -160,6 +170,7 @@ const Edit = () => {
                         type="datetime-local" 
                         placeholder='date'
                         value={formData.date}
+                        style={{color: "grey", border: "none"}}
                         />
                     </div>
                     <div className={classes.formInput}>

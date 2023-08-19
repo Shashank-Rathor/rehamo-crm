@@ -185,6 +185,7 @@ const New = () => {
                         placeholder='name'
                         value={formData.crm}
                         disabled
+                        style={{color: "grey", border: "none"}}
                         />
                     </div>
                     <div className={classes.formInput}>

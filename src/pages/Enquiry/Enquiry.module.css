@@ -12,6 +12,19 @@
     position: relative;
     padding: 15px;
 }
+.addButton{
+    position: absolute;
+    top: 15px;
+    right: 20%;
+    font-size: 20px;
+    color: #7451f8;
+    background-color: #7551f84b;
+    cursor: pointer;
+    border-radius: 5px;
+    width: 140px;
+    padding-left: 5%;
+    padding-right: 5%;
+}
 .editButton{
     position: absolute;
     top: 15px;

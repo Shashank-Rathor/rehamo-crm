@@ -51,6 +51,9 @@ const [dataArray, setDataArray] = useState([]);
         <div className={classes.singleContainer}>
             <Navbar/>
               <div className={classes.enquiryContainer}>
+              <Link to={`/enquiries/add?id=${data.ID}`}>
+                <div className={classes.addButton}>Add Old Client</div>
+                </Link>
                 {name == data.Crm ? <Link to={`/enquiry/edit?id=${data.ID}`}>
                 <div className={classes.editButton}>Edit</div>
                 </Link> : <></>}
