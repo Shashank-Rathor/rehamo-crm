@@ -22,8 +22,7 @@
     cursor: pointer;
     border-radius: 5px;
     width: 140px;
-    padding-left: 5%;
-    padding-right: 5%;
+    padding: 2%;
 }
 .editButton{
     position: absolute;
@@ -36,6 +35,18 @@
     border-radius: 5px;
     width: 100px;
     padding-left: 5%;
+}
+.transferButton{
+    position: absolute;
+    top: 60px;
+    right: 2%;
+    font-size: 20px;
+    color: #7451f8;
+    background-color: #7551f84b;
+    cursor: pointer;
+    border-radius: 5px;
+    width: 160px;
+    border: none;
 }
 .deleteButton{
     font-size: 20px;
@@ -53,7 +64,7 @@
     flex-wrap: wrap;
     gap: 10px;
     justify-content: space-around;
-    margin-top: 40px;
+    margin-top: 70px;
     margin-bottom: 40px;
     border-radius: 5px;
     padding: 20px;
@@ -71,4 +82,36 @@
 }
 .formInput ul{
     margin-left: 0%;
+}
+.remarksHeader{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgba(211, 211, 211, 0.486);
+    padding: 10px;
+    border-radius: 5px;
+    width: 100%;
+    margin-bottom: 10px;
+}
+.remarkValue{
+    display: block;
+    list-style: none;
+}
+.remarkValue:hover{
+    background-color: transparent;
+}
+.remarksContainer{
+    display: flex;
+    -webkit-box-shadow: -2px -5px 18px -8px #000000; 
+    box-shadow: -2px -5px 18px -8px #000000;
+    border-radius: 5px;
+    padding: 20px;
+    margin: 20px 15px 40px 15px;
+    
+}
+.remarksLeft{
+    flex: 5;
+}
+.remarksRight{
+    flex: 1;
 }

@@ -33,7 +33,7 @@ const Edit = () => {
     });
     const [data,setData] = useState([]);
     const [order_id,setOrderID] = useState("");
-    const [isModalOpen, setIsModalOpen] = useState(false);
+   
     const [dataArray, setDataArray] = useState([]);
     const [inputValue2, setInputValue2] = useState('');
 

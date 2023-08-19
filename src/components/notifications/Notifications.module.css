@@ -6,7 +6,7 @@
     border-radius: 10px;
     z-index: 2;
     top: 60%;
-    right: 100%;
+    left: 100%;
     padding: 15px;
     width: 20vw;
 }
@@ -19,3 +19,10 @@
 .notifyList{
     margin-top: 20px;
 }
+.closebutton {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #888;
+    float: right;
+  }

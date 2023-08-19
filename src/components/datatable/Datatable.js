@@ -147,14 +147,18 @@ const Datatable = () => {
   return (
     <div className={classes.datatable}>
       
+      <div style={{display: "flex"}}>
       <div className={classes.search}>
           <input type="text" placeholder='Search' value={searchInput} onChange={(e) => handleSearch(e)}/>
           <SearchIcon/>
         </div>
-        <div className={classes.datatableTitle}>
-        <Link to="/enquiries/new" style={{textDecoration: "none"}} className={classes.link}>
+        <div style={{paddingTop: "5px"}}>
+        <Link to="/enquiries/new" style={{textDecoration: "none",marginLeft: "20px"}} className={classes.link}>
           Add New
         </Link>
+        </div>
+        </div>
+        <div className={classes.datatableTitle}>
             <div className={classes.filterLink} onClick={() => handleFilter("all")}>All</div>
             <div className={classes.filterLink} onClick={() => handleFilter("active")}>Active</div>
             <div className={classes.filterLink} onClick={() => handleFilter("sold")}>Sold</div>

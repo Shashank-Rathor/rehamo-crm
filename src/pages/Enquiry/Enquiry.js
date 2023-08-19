@@ -1,17 +1,25 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState,useContext } from 'react';
 import classes from './Enquiry.module.css';
 import Sidebar from '../../components/sidebar/Sidebar';
 import Navbar from '../../components/navbar/Navbar';
 import { Link } from 'react-router-dom';
-import { getDoc,doc } from 'firebase/firestore';
+import { getDoc,doc,updateDoc } from 'firebase/firestore';
 import {db} from "../../firebase";
+import Modal from '../../components/modal/Modal';
+import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../components/context/AuthContext';
 
 const Enquiry = () => {
+  const navigate = useNavigate();
+  const {currentUser} = useContext(AuthContext);
   const [name, setName] = useState([]);
-  const [remarks,setRemarks] = useState({});
 
 const [data,setData] = useState([]);
 const [dataArray, setDataArray] = useState([]);
+const [isModalOpen, setIsModalOpen] = useState(false);
+const [crm, setCrm] = useState('');
+const [order_id, setOrderID] = useState('');
+
 
   var id='';
 
@@ -30,6 +38,7 @@ const [dataArray, setDataArray] = useState([]);
     data[tmp[0]] = tmp[1]
   }
   id = data.id
+  setOrderID(id);
   
   const docRef = doc(db, "enquiries", id);
    
@@ -44,7 +53,36 @@ const [dataArray, setDataArray] = useState([]);
   fetchData();
   },[])
 
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
+
+  const handleButtonClick = () => {
+    setIsModalOpen(true);
+  };
+  const handleInputChange = (e) => {
+    setCrm(e.target.value);
+    };
+
+    const handleUpdateField = async () => {
+      try {
+        await updateDoc(doc(db, "enquiries",order_id), {
+          Crm: crm,
+        })
+        .then(()=>{
+          navigate(`/enquiries/${currentUser.displayName}`)
+        })
   
+        console.log('Field updated successfully.');
+      } catch (error) {
+        console.error('Error updating field:', error);
+      }
+  
+      handleCloseModal();
+    };
+  
+
+
   return (
     <div className={classes.single}>
         <Sidebar/>
@@ -54,11 +92,21 @@ const [dataArray, setDataArray] = useState([]);
               <Link to={`/enquiries/add?id=${data.ID}`}>
                 <div className={classes.addButton}>Add Old Client</div>
                 </Link>
-                {name == data.Crm ? <Link to={`/enquiry/edit?id=${data.ID}`}>
+                {name == data.Crm ?
+                <>
+                <Link to={`/enquiry/edit?id=${data.ID}`}>
                 <div className={classes.editButton}>Edit</div>
-                </Link> : <></>}
+                </Link> 
+                <button className={classes.transferButton} onClick={handleButtonClick}>Transfer</button> </> : <></>}
                 <h1 className={classes.title}>{data.Name}</h1>
                 <div className={classes.detailContainer}>
+                  <Modal 
+                  isOpen={isModalOpen} 
+                  onClose={handleCloseModal}
+                  crm={crm}
+                  handleInputChange={handleInputChange}
+                  onSubmit={handleUpdateField}
+                  />
                     <div className={classes.detailItem}>
                       <span className={classes.itemKey}>ID: <span>{data.ID}</span></span>
                     </div>
@@ -108,18 +156,27 @@ const [dataArray, setDataArray] = useState([]);
                     <div className={classes.detailItem}>
                     <span className={classes.itemKey}>Reminder Date: <span>{data.ReminderDate}</span></span>
                   </div>:<></>}
-                    <div className={classes.detailItem}>
-                    <span className={classes.itemKey}>Remarks</span>
+                    
+                </div>
+              </div>
+              
+              <span className={classes.itemKey}>Remarks</span>
+              <div className={classes.remarksContainer}>
+              <div className={classes.detailItem} style={{width: "100%"}}>
                         <ul style={{paddingLeft: "5px"}}>
                          {dataArray.map((data, index) => (
-                            <li key={index} className={classes.itemValue} >
-                             <b>Date: </b> {data.input1},  <b>CRM:</b>{data.input3}, <b>Remarks:</b> {data.input2}
+                            <li key={index} className={classes.remarkValue} >
+                              <div className={classes.remarksHeader}>
+                              <div className={classes.remarksLeft}><b>CRM:</b>{data.input3}</div>
+                              <div className={classes.remarksRight}><b>Date: </b> {data.input1}</div>
+                              </div>
+                              <div> 
+                              <b>Remarks:</b> {data.input2}
+                              </div>
                             </li>
                          ))}
                         </ul>
                     </div>  
-                    <div className={classes.detailItem}/>
-                </div>
               </div>
         </div>
     </div>

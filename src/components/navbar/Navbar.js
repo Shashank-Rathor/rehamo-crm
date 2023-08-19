@@ -56,15 +56,16 @@ useEffect(() => {
   }
 
   return (
-    <div className={classes.navbar}>
-      <div className={classes.wrapper}>
-        <div />
-        <div className={classes.items}>
-            <div className={classes.item}>
+    <div className={classes.navbar} >
+      <div className={classes.wrapper} >
+      <div className={classes.item}>
               <NotificationsNoneIcon className={classes.icon} onClick={() => handleNotification()}/>
               <div className={classes.counter}>{notificationCount}</div>
-              {isNotification === true ? <Notifications data={notifications}/> : <></>}
+              {isNotification === true ? <Notifications data={notifications} handleNotification={handleNotification}/> : <></>}
             </div>
+        <div />
+        <div className={classes.items} >
+            
             <div className={classes.item}>
               <PersonIcon className={classes.icon}/>
               {name}

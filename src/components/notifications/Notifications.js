@@ -3,7 +3,7 @@ import classes from './Notifications.module.css';
 import PersonIcon from '@mui/icons-material/Person';
 import { Link } from 'react-router-dom';
 
-const Notifications = ({data}) => {
+const Notifications = ({data,handleNotification}) => {
 
   if(!data.length){
     return <p>Loading</p>
@@ -11,6 +11,9 @@ const Notifications = ({data}) => {
   return (
     <div className={classes.notificationContainer}>
         <span className={classes.notifyTitle}>Follow Ups for today</span>
+        <button className={classes.closebutton} onClick={() => handleNotification()}>
+          Close
+        </button>
         <hr/>
        {data ?  
        <div className={classes.notifyList}>
