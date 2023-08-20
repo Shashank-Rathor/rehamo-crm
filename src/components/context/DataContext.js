@@ -62,10 +62,10 @@ export class DataProvider extends Component {
         this.fetchUsers();
     }
 
-    componentDidUpdate(){
-      this.fetch();
-      this.fetchUsers();
-    }
+    // componentDidUpdate(){
+    //   this.fetch();
+    //   this.fetchUsers();
+    // }
 
 
     handleDelete = async(id) =>{
