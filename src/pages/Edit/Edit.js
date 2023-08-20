@@ -120,6 +120,7 @@ const Edit = () => {
                     ReminderDate: formData.reminderDate || null,
               })
               .then(()=>{
+                alert("Edited")
                 navigate(`/enquiries/${currentUser.displayName}`)
               })
         }

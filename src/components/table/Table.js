@@ -41,7 +41,7 @@ const List = ({data}) => {
         }}
         pageSizeOptions={[5, 10]}
         onRowClick={(params) => handleCellClick(params)}
-        checkboxSelection
+        // checkboxSelection
       />
     </div>
   )

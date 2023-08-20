@@ -124,6 +124,7 @@ const New = () => {
                     
               })
               .then(()=>{
+                
                 navigate(`/enquiries/${formData.crm}`)
                 const enquiryRef = doc(db, "enquiryid", "T6k1a5DIQ6JLml1SKpCc");
 

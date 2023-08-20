@@ -48,8 +48,7 @@ const Datatable = () => {
   },[data])
 
   const handleSelectionChange = (selection) => {
-    // setSelectedRows(selection.selectionModel);
-    console.log(selection.selectionModel)
+    console.log(selection)
   };
 
   const handleSearch = (e) => {
@@ -185,9 +184,9 @@ const Datatable = () => {
         }}
         pageSizeOptions={[5, 10]}
         onRowClick={(params) => handleCellClick(params)}
-        checkboxSelection
-        onSelectionModelChange={itm => console.log(itm)}
+        // checkboxSelection
         // selectionModel={selectedRows}
+        // onSelectionModelChange={(selection) => handleSelectionChange(selection)}
       />
     </div>
   )
