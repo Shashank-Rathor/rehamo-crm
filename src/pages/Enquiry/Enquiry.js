@@ -87,7 +87,7 @@ const [order_id, setOrderID] = useState('');
     <div className={classes.single}>
         <Sidebar/>
         <div className={classes.singleContainer}>
-            <Navbar/>
+            
               <div className={classes.enquiryContainer}>
               <Link to={`/enquiries/add?id=${data.ID}`}>
                 <div className={classes.addButton}>Add Old Client</div>

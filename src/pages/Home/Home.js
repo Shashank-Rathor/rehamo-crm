@@ -125,7 +125,7 @@ const Home = () => {
     <div className={classes.main}>
       <Sidebar/>
       <div className={classes.container}>
-        <Navbar/>
+        <Navbar data={data}/>
          <div className={classes.widgets}>
             <Widget type="active" activeData={activeData} />
             <Widget type="sold" soldData={soldData}/>

@@ -6,15 +6,13 @@ import PersonIcon from '@mui/icons-material/Person';
 import Notifications from '../notifications/Notifications';
 import { AuthContext } from "../context/AuthContext";
 import { useContext } from "react";
-import { DataContext } from '../../components/context/DataContext';
 
-const Navbar = () => {
+const Navbar = ({data}) => {
   const [name, setName] = useState([]);
   const [notifications,setNotifications] = useState([]);
   const [notificationCount,setNotificationCount] = useState("");
   const [isNotification,setIsNotification] = useState(false);
   const {currentUser} = useContext(AuthContext);
-  const {data} = useContext(DataContext);
 
 useEffect(() => {
 
@@ -49,6 +47,7 @@ useEffect(() => {
     setNotifications(notificationList);
     setNotificationCount(notificationList.length);
 
+
 }, [data]);
 
   const handleNotification = () =>{
@@ -59,9 +58,10 @@ useEffect(() => {
     <div className={classes.navbar} >
       <div className={classes.wrapper} >
       <div className={classes.item}>
-              <NotificationsNoneIcon className={classes.icon} onClick={() => handleNotification()}/>
-              <div className={classes.counter}>{notificationCount}</div>
-              {isNotification === true ? <Notifications data={notifications} handleNotification={handleNotification}/> : <></>}
+       <NotificationsNoneIcon className={classes.icon} onClick={() => handleNotification()}/>
+       
+        <div className={classes.counter}>{notificationCount}</div>
+        {isNotification === true ?  <Notifications data={notifications} handleNotification={handleNotification}/> : <></>}
             </div>
         <div />
         <div className={classes.items} >

@@ -10,8 +10,7 @@ import { collection, getDocs,doc, deleteDoc } from "firebase/firestore";
 import { db } from "../../firebase";
 
 const Enquiries = () => {
-  const {currentUser} = useContext(AuthContext);
-  const {users,isAdmin} = useContext(DataContext);
+  const {users} = useContext(DataContext);
 
 
   const handleDelete = async(id) => {
@@ -55,7 +54,6 @@ const actionColoumn = [
     <div className={classes.users}>
         <Sidebar/>
         <div className={classes.usersContainer}>
-            <Navbar/>
           <div className={classes.datatable}>
           <div className={classes.datatableTitle}>
           <Link to="/users/new" style={{textDecoration: "none"}} className={classes.link}>

@@ -202,7 +202,6 @@ const AddOld = () => {
     <div className={classes.new}>
         <Sidebar/>
         <div className={classes.newContainer}>
-            <Navbar/>
              <div className={classes.top}>
              <h1>Add OldClient Enquiry</h1></div>
              <div className={classes.bottom}>

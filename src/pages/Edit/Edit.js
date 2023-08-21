@@ -157,7 +157,6 @@ const Edit = () => {
     <div className={classes.new}>
         <Sidebar/>
         <div className={classes.newContainer}>
-            <Navbar/>
              <div className={classes.top}>
              <h1>Edit Enquiry</h1></div>
              <div className={classes.bottom}>

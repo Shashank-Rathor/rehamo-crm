@@ -6,14 +6,11 @@ import { Link } from 'react-router-dom';
 import Excelexport from '../../components/Excelexport';
 import { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
-import { DataContext } from '../../components/context/DataContext';
 import { useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import SearchIcon from '@mui/icons-material/Search';
 
-const Datatable = () => {
-  const {data} = useContext(DataContext);
-  const {handleDelete} = useContext(DataContext);
+const Datatable = ({data}) => {
   const [filterData, setFilterData] = useState([]);
   const [crmData, setCrmData] = useState([]);
   const [startDate, setStartDate] = useState(" ");

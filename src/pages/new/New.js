@@ -6,7 +6,6 @@ import { useState,useEffect } from 'react';
 import { addDoc, collection, doc, serverTimestamp, setDoc,getDocs,updateDoc  } from "firebase/firestore"; 
 import { db } from '../../firebase';
 import { useNavigate } from 'react-router-dom';
-import Modal from '../../components/modal/Modal';
 
 const New = () => {
     
@@ -162,7 +161,6 @@ const New = () => {
     <div className={classes.new}>
         <Sidebar/>
         <div className={classes.newContainer}>
-            <Navbar/>
              <div className={classes.top}>
              <h1>Add New Enquiry</h1></div>
              <div className={classes.bottom}>

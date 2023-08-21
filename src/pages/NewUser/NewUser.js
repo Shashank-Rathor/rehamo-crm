@@ -82,7 +82,6 @@ const New = () => {
     <div className={classes.new}>
         <Sidebar/>
         <div className={classes.newContainer}>
-            <Navbar/>
              <div className={classes.top}>
              <h1>Add New User</h1></div>
              <div className={classes.bottom}>
