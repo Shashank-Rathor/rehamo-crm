@@ -129,6 +129,7 @@ const EditUser = () => {
                         type="email" 
                         placeholder='email'
                         disabled
+                        value={formData.email}
                         />
                     </div>
                     <div className={classes.formInput}>
