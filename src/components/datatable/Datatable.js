@@ -4,8 +4,6 @@ import { DataGrid } from '@mui/x-data-grid';
 import {userColoumns, userRows} from '../../datatablsesource';
 import { Link } from 'react-router-dom';
 import Excelexport from '../../components/Excelexport';
-import { useContext } from "react";
-import { AuthContext } from "../context/AuthContext";
 import { useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import SearchIcon from '@mui/icons-material/Search';
@@ -16,8 +14,6 @@ const Datatable = ({data}) => {
   const [startDate, setStartDate] = useState(" ");
   const [endDate, setEndDate] = useState(" ");
   const [dateData, setdateDate] = useState([]);
-  const [name, setName] = useState([]);
-  const {currentUser} = useContext(AuthContext);
   const [selectedRows, setSelectedRows] = useState([]);
   const [searchInput, setSearchInput] = useState('');
   
@@ -26,9 +22,6 @@ const Datatable = ({data}) => {
 
   useEffect(() => {
 
-    if (currentUser) {
-      setName(currentUser.displayName);
-     }
       let crmList=[];
 
       data.map((item) => {

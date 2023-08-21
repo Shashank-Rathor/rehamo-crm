@@ -35,7 +35,6 @@ export class DataProvider extends Component {
         list.push({id: doc.id, ...doc.data()});
       });
       this.setState({users: list})
-      console.log(list) 
     }
       catch(err){
         console.log(err)
