@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import classes from './Sidebar.module.css';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import ListIcon from '@mui/icons-material/List';
@@ -8,18 +8,15 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { Link, useNavigate } from 'react-router-dom';
 import { signOut } from 'firebase/auth';
 import {auth} from "../../firebase";
+import { AuthContext } from '../../components/context/AuthContext';
 
 const Sidebar = () => {
-  const [user,setUser] = useState("")
-  
+  const {currentUser} = useContext(AuthContext);
+  const [admin,setAdmin] = useState("")
   const isAdmin = JSON.parse(localStorage.getItem("Admin"))
 
   const navigate = useNavigate();
   
-  useEffect(() => {
-    const currentUser = JSON.parse(localStorage.getItem("user"))
-    setUser(currentUser)
-  },[])
 
 
   const handleLogout = () => {               
@@ -53,7 +50,7 @@ const Sidebar = () => {
                 {isAdmin === false ? 
                 <>
                 <p className={classes.title}>LISTS</p>
-                <Link to={`/enquiries/${user.displayName}`} style={{textDecoration:"none"}}>
+                <Link to={`/enquiries/${currentUser.displayName}`} style={{textDecoration:"none"}}>
                 <li>
                   <ListIcon className={classes.icon}/>
                   <span>Enquiries</span>
@@ -84,8 +81,8 @@ const Sidebar = () => {
                 <p className={classes.title}>USER</p>
                 <li>
                   <AccountCircleIcon className={classes.icon}/>
-                  <span>{user.displayName}</span>
-                </li>
+                  <span>{currentUser.displayName}</span>
+                </li>   
                 <li onClick={()=>handleLogout()}>
                   <LogoutIcon className={classes.icon}/>
                   <span>Logout</span>
