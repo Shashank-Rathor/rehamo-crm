@@ -16,10 +16,13 @@ import {
 import New from "./pages/new/New";
 import Edit from "./pages/Edit/Edit";
 import { AuthContext } from "./components/context/AuthContext";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import EditUser from "./pages/EditUser/EditUser";
 
 function App() {
+  useEffect(() => {
+    console.log("new")
+  },[])
 
   const {currentUser} = useContext(AuthContext)
 

@@ -9,16 +9,14 @@ import { Link, useNavigate } from 'react-router-dom';
 import { signOut } from 'firebase/auth';
 import {auth} from "../../firebase";
 import { AuthContext } from '../../components/context/AuthContext';
-import { DataContext } from '../../components/context/DataContext';
 
 const Sidebar = () => {
   const {currentUser} = useContext(AuthContext);
-  const {users,isAdmin} = useContext(DataContext);
   const [admin,setAdmin] = useState("")
+  const isAdmin = JSON.parse(localStorage.getItem("Admin"))
 
   const navigate = useNavigate();
   
-
 
 
   const handleLogout = () => {               
