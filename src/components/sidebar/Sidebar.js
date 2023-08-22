@@ -50,7 +50,7 @@ const Sidebar = () => {
                 {isAdmin === false ? 
                 <>
                 <p className={classes.title}>LISTS</p>
-                <a href={`/enquiries/${currentUser.displayName}`} style={{textDecoration:"none"}}>
+                <a href={`/enquiries/${currentUser.displayName.replace(/\s/g, '')}`} style={{textDecoration:"none"}}>
                 <li>
                   <ListIcon className={classes.icon}/>
                   <span>Enquiries</span>
@@ -59,7 +59,7 @@ const Sidebar = () => {
                   {isAdmin === true ? 
                   <>
                   <p className={classes.title}>ENQUIRIES</p>
-                  <a  href="/enquiries/Vicky" style={{textDecoration:"none"}}>
+                  <a  href="/enquiries/VickyMalik" style={{textDecoration:"none"}}>
                 <li>
                   <ListIcon className={classes.icon}/>
                   <span>Vicky</span>

@@ -32,7 +32,7 @@ const Datatable = ({data}) => {
       let crmList=[];
 
       data.map((item) => {
-        if(item.Crm === yourParameter.name){
+        if(item.Crm.replace(/\s/g, '') === yourParameter.name.replace(/\s/g, '')){
         crmList.push({...item})
       }
       else{
