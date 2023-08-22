@@ -99,7 +99,7 @@ const New = () => {
     const handleAdd = async(e) => {
         e.preventDefault();
         
-        if(formData.date && formData.crm && formData.source && formData.enquirytype && formData.name && formData.revenue && formData.product && formData.typeofpurchase && formData.status && formData.product)
+        if(formData.date && formData.crm && formData.source && formData.enquirytype && formData.name && formData.revenue && formData.product && formData.typeofpurchase && formData.status)
         {
         try{
             const res = await setDoc(doc(db, "enquiries",order_id), {
