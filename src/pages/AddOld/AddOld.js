@@ -24,6 +24,7 @@ const AddOld = () => {
         city:'',
         pincode:'',
         contact: '',
+        contact2: '',
         email:'',
         product: '',
         remarks:'',
@@ -91,6 +92,7 @@ const AddOld = () => {
                   city: res.data().City,
                   pincode: res.data().Pincode,
                   contact: res.data().Contact,
+                  contact2: res.data().Contact2,
                   email: res.data().Email,
                   product: "",
                   typeofpurchase: "",
@@ -145,6 +147,7 @@ const AddOld = () => {
                     City: formData.city,
                     Pincode: formData.pincode,
                     Contact: formData.contact,
+                    Contact2: formData.contact2,
                     Email: formData.email,
                     Product: formData.product,
                     Revenue: formData.revenue,
@@ -155,7 +158,7 @@ const AddOld = () => {
                     
               })
               .then(()=>{
-                navigate(`/enquiries/${formData.crm}`)
+                navigate(`/enquiries/${formData.crm.replace(/\s/g, '')}`)
                 const enquiryRef = doc(db, "enquiryid", "T6k1a5DIQ6JLml1SKpCc");
 
                 const docRef = updateDoc(enquiryRef, {
@@ -300,15 +303,22 @@ const AddOld = () => {
                         style={{color: "grey", border: "none"}}
                         />
                     </div>
-                    <div className={classes.formInput}>
+                    <div className={classes.formInput} style={{display: "flex"}}>
                         <label>Contact</label>
                         <input 
                         id="contact" 
                         type="tel" 
                         placeholder='contact'
                         value={formData.contact}
-                        disabled
-                        style={{color: "grey", border: "none"}}
+                        onChange={handleInput}
+                        />
+                        <label>Additional Contact</label>
+                        <input 
+                        id="contact2" 
+                        type="tel" 
+                        placeholder='contact'
+                        value={formData.contact2}
+                        onChange={handleInput}
                         />
                     </div>
                     <div className={classes.formInput}>

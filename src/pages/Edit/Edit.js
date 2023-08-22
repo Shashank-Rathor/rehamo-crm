@@ -25,6 +25,7 @@ const Edit = () => {
         city: '',
         pincode: '',
         contact: '',
+        contact2: '',
         email:'',
         product: '',
         remarks:'',
@@ -68,6 +69,7 @@ const Edit = () => {
                     city: res.data().City,
                     pincode: res.data().Pincode,
                     contact: res.data().Contact,
+                    contact2: res.data().Contact2,
                     email: res.data().Email,
                     product: res.data().Product,
                     typeofpurchase: res.data().TypeOfPurchase,
@@ -111,6 +113,7 @@ const Edit = () => {
                     City: formData.city,
                     Pincode: formData.pincode,
                     Contact: formData.contact,
+                    Contact2: formData.contact2,
                     Email: formData.email,
                     Product: formData.product,
                     Revenue: formData.revenue,
@@ -121,7 +124,7 @@ const Edit = () => {
               })
               .then(()=>{
                 alert("Edited")
-                navigate(`/enquiries/${currentUser.displayName}`)
+                navigate(`/enquiries/${currentUser.displayName.replace(/\s/g, '')}`)
               })
         }
         catch(err){
@@ -258,13 +261,21 @@ const Edit = () => {
                         onChange={handleInput}
                         />
                     </div>
-                    <div className={classes.formInput}>
+                    <div className={classes.formInput} style={{display: "flex"}}>
                         <label>Contact</label>
                         <input 
                         id="contact" 
                         type="tel" 
                         placeholder='contact'
                         value={formData.contact}
+                        onChange={handleInput}
+                        />
+                        <label>Additional Contact</label>
+                        <input 
+                        id="contact2" 
+                        type="tel" 
+                        placeholder='contact'
+                        value={formData.contact2}
                         onChange={handleInput}
                         />
                     </div>

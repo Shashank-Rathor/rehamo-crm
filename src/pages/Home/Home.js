@@ -16,8 +16,8 @@ const Home = () => {
    const [soldData,setSoldData] = useState([]);
    const [closedData,setClosedData] = useState([]);
    const [filterData, setFilterData] = useState([]);
-   const [startDate, setStartDate] = useState(" ");
-   const [endDate, setEndDate] = useState(" ");
+   const [startDate, setStartDate] = useState(null);
+   const [endDate, setEndDate] = useState(null);
    const [dateData, setdateDate] = useState([]);
    const [sumActive, setSumActive] = useState("");
    const [sumSold, setSumSold] = useState("");
@@ -72,9 +72,9 @@ const Home = () => {
  }
  const handleFilterDate = () => {
 
-   const dataInRange = data.filter(item => {
+   const dataInRange = filterData.filter(item => {
      const itemDate = new Date(item.Date);
-     return itemDate >= new Date(startDate) && itemDate <= new Date(endDate);
+     return itemDate >= new Date(startDate + "T00:00:00") && itemDate <= new Date(endDate + "T23:59:59");
    });
 
    setdateDate(dataInRange)

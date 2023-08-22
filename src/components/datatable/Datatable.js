@@ -11,8 +11,8 @@ import SearchIcon from '@mui/icons-material/Search';
 const Datatable = ({data}) => {
   const [filterData, setFilterData] = useState([]);
   const [crmData, setCrmData] = useState([]);
-  const [startDate, setStartDate] = useState(" ");
-  const [endDate, setEndDate] = useState(" ");
+  const [startDate, setStartDate] = useState(null);
+  const [endDate, setEndDate] = useState(null);
   const [dateData, setdateDate] = useState([]);
   const [selectedRows, setSelectedRows] = useState([]);
   const [searchInput, setSearchInput] = useState('');
@@ -108,7 +108,7 @@ const Datatable = ({data}) => {
 
     const dataInRange = crmData.filter(item => {
       const itemDate = new Date(item.Date);
-      return itemDate >= new Date(startDate) && itemDate <= new Date(endDate);
+      return itemDate >= new Date(startDate + "T00:00:00") && itemDate <= new Date(endDate  + "T23:59:59");
     });
     setFilterData(dataInRange)
     setdateDate(dataInRange)
