@@ -18,7 +18,7 @@ export class DataProvider extends Component {
       querySnapshot.forEach((doc) => {
         list.push({id: doc.id, ...doc.data()});
       });
-      this.setState({data: list})
+      this.setState({data: list.reverse()})
       
       }
       catch(err){

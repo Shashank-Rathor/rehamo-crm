@@ -141,6 +141,9 @@ const [order_id, setOrderID] = useState('');
                       <span className={classes.itemKey}>Email: <span>{data.Email}</span></span>
                     </div>
                     <div className={classes.detailItem}>
+                      <span className={classes.itemKey}>Category: <span>{data.Category}</span></span>
+                    </div>
+                    <div className={classes.detailItem}>
                       <span className={classes.itemKey}>Product: <span>{data.Product}</span></span>
                     </div>
                     <div className={classes.detailItem}>

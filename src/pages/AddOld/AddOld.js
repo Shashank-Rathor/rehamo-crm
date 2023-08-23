@@ -7,6 +7,29 @@ import { addDoc, collection, doc, getDoc, setDoc,getDocs,updateDoc  } from "fire
 import { db } from '../../firebase';
 import { useNavigate } from 'react-router-dom';
 import Modal from '../../components/modal/Modal';
+import Autocomplete from '@mui/material/Autocomplete';
+import TextField from '@mui/material/TextField';
+
+
+const options = [
+  'Wheelchairs',
+  'Grab Bars',
+  'Shower Chair',
+  'Commode Chair',
+  'Shower Commode Chair',
+  'Bedroom Aids',
+  'Transfer Aids',
+  'Walkers',
+  'Canes',
+  'Crutches',
+  'Rollators',
+  'Orthotics',
+  'Footwears',
+  'Pediatrics',
+  'Hospital Care',
+  'Incontinence',
+  'Complaint'
+];
 
 const AddOld = () => {
     
@@ -26,6 +49,7 @@ const AddOld = () => {
         contact: '',
         contact2: '',
         email:'',
+        category:'',
         product: '',
         remarks:'',
         typeofpurchase: '',
@@ -94,6 +118,7 @@ const AddOld = () => {
                   contact: res.data().Contact,
                   contact2: res.data().Contact2,
                   email: res.data().Email,
+                  category: "",
                   product: "",
                   typeofpurchase: "",
                   remarks: "",
@@ -149,6 +174,7 @@ const AddOld = () => {
                     Contact: formData.contact || null,
                     Contact2: formData.contact2 || null,
                     Email: formData.email || null,
+                    Category: formData.category || null,
                     Product: formData.product,
                     Revenue: formData.revenue,
                     TypeOfPurchase: formData.typeofpurchase,
@@ -383,6 +409,22 @@ const AddOld = () => {
                         />
                     </div>
                     <div className={classes.formInput}>
+                    <Autocomplete
+                        id="category" 
+                        options={options}
+                        getOptionLabel={(option) => option}
+                        value={formData.category}
+                        onChange={(event, newValue) =>  
+                            setFormData({
+                            ...formData,
+                            category: newValue,
+                          })
+                        }
+                        renderInput={(params) => <TextField {...params} label="Category" />}
+                    />
+                    </div>  
+                    <div className={classes.formInput}></div>
+                    <div className={classes.formInput}>
                         <label>Product</label>
                         <textarea 
                         id="product" 
@@ -409,12 +451,12 @@ const AddOld = () => {
                         <div className={classes.remarksButton} onClick={handleRemarkSubmit}>Add</div>
                     </div>  
         
-                    <button type="submit" className={classes.sendButton}>Send</button>
+                    <button type="submit" className={classes.sendButton}>Save</button>
                 </form>
              </div>
         </div>
     </div>
-  )
+  ) 
 }
 
 export default AddOld

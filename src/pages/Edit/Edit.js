@@ -7,6 +7,28 @@ import { addDoc, collection, doc, setDoc,updateDoc,getDoc,get  } from "firebase/
 import { db } from '../../firebase';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../components/context/AuthContext';
+import Autocomplete from '@mui/material/Autocomplete';
+import TextField from '@mui/material/TextField';
+
+const options = [
+    'Wheelchairs',
+    'Grab Bars',
+    'Shower Chair',
+    'Commode Chair',
+    'Shower Commode Chair',
+    'Bedroom Aids',
+    'Transfer Aids',
+    'Walkers',
+    'Canes',
+    'Crutches',
+    'Rollators',
+    'Orthotics',
+    'Footwears',
+    'Pediatrics',
+    'Hospital Care',
+    'Incontinence',
+    'Complaint'
+  ];
 
 const Edit = () => {
     
@@ -27,6 +49,7 @@ const Edit = () => {
         contact: '',
         contact2: '',
         email:'',
+        category: '',
         product: '',
         remarks:'',
         typeofpurchase: '',
@@ -71,6 +94,7 @@ const Edit = () => {
                     contact: res.data().Contact,
                     contact2: res.data().Contact2,
                     email: res.data().Email,
+                    category: res.data().Category,
                     product: res.data().Product,
                     typeofpurchase: res.data().TypeOfPurchase,
                     remarks: res.data().Remarks,
@@ -115,6 +139,7 @@ const Edit = () => {
                     Contact: formData.contact || null,
                     Contact2: formData.contact2 || null,
                     Email: formData.email || null,
+                    Category: formData.category || null,
                     Product: formData.product,
                     Revenue: formData.revenue,
                     TypeOfPurchase: formData.typeofpurchase,
@@ -339,6 +364,22 @@ const Edit = () => {
                         />
                     </div>
                     <div className={classes.formInput}>
+                    <Autocomplete
+                        id="category" 
+                        options={options}
+                        getOptionLabel={(option) => option}
+                        value={formData.category}
+                        onChange={(event, newValue) =>  
+                            setFormData({
+                            ...formData,
+                            category: newValue,
+                          })
+                        }
+                        renderInput={(params) => <TextField {...params} label="Category" />}
+                    />
+                    </div>  
+                    <div className={classes.formInput}></div>
+                    <div className={classes.formInput}>
                         <label>Product</label>
                         <textarea 
                         id="product" 
@@ -364,7 +405,7 @@ const Edit = () => {
                         <textarea id="Remark" className={classes.remarksInput} type="textArea" rows="4" cols="50" placeholder="remarks" value={inputValue2} onChange={handleInputChange2}/>
                         <div className={classes.remarksButton} onClick={handleRemarkSubmit}>Add</div>
                     </div> 
-                    <button type="submit" className={classes.sendButton}>Send</button>
+                    <button type="submit" className={classes.sendButton}>Save</button>
                 </form>
              </div>
         </div>
