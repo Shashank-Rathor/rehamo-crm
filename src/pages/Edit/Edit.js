@@ -109,12 +109,12 @@ const Edit = () => {
                     Source: formData.source,
                     EnquiryType: formData.enquirytype,
                     Name: formData.name,
-                    Address: formData.address,
-                    City: formData.city,
-                    Pincode: formData.pincode,
-                    Contact: formData.contact,
-                    Contact2: formData.contact2,
-                    Email: formData.email,
+                    Address: formData.address || null,
+                    City: formData.city || null,
+                    Pincode: formData.pincode || null,
+                    Contact: formData.contact || null,
+                    Contact2: formData.contact2 || null,
+                    Email: formData.email || null,
                     Product: formData.product,
                     Revenue: formData.revenue,
                     TypeOfPurchase: formData.typeofpurchase,
@@ -178,16 +178,15 @@ const Edit = () => {
                     </div>
                     <div className={classes.formInput}>
                         <label>CRM</label>
-                        <select 
+                        <input 
+                        type="text"
                         id="crm" 
                         name="crm"
                         value={formData.crm}
-                        onChange={handleInput}
+                        disabled
+                        style={{color: "grey", border: "none"}}
                         >
-                            <option value="Default">Select</option>
-                            <option value="Vicky">Vicky</option>
-                            <option value="Ramya">Ramya</option>
-                        </select>
+                        </input>
                     </div>
                     <div className={classes.formInput}>
                         <label>Source</label>

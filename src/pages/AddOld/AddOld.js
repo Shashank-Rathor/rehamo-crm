@@ -133,7 +133,7 @@ const AddOld = () => {
     const handleAdd = async(e) => {
         e.preventDefault();
         
-        if(formData.date && formData.crm && formData.source && formData.enquirytype && formData.name && formData.address && formData.product && formData.typeofpurchase && formData.status)
+        if(formData.date && formData.crm && formData.source && formData.enquirytype && formData.name && formData.revenue && formData.product && formData.typeofpurchase && formData.status)
         {
         try{
             const res = await setDoc(doc(db, "enquiries",order_id), {
@@ -143,12 +143,12 @@ const AddOld = () => {
                     Source: formData.source,
                     EnquiryType: formData.enquirytype,
                     Name: formData.name,
-                    Address: formData.address,
-                    City: formData.city,
-                    Pincode: formData.pincode,
-                    Contact: formData.contact,
-                    Contact2: formData.contact2,
-                    Email: formData.email,
+                    Address: formData.address || null,
+                    City: formData.city || null,
+                    Pincode: formData.pincode || null,
+                    Contact: formData.contact || null,
+                    Contact2: formData.contact2 || null,
+                    Email: formData.email || null,
                     Product: formData.product,
                     Revenue: formData.revenue,
                     TypeOfPurchase: formData.typeofpurchase,
