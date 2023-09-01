@@ -16,6 +16,9 @@ const Datatable = ({data}) => {
   const [dateData, setdateDate] = useState([]);
   const [selectedRows, setSelectedRows] = useState([]);
   const [searchInput, setSearchInput] = useState('');
+  const [activeData,setActiveData] = useState([]);
+   const [soldData,setSoldData] = useState([]);
+   const [closedData,setClosedData] = useState([]);
   
   const yourParameter = useParams();
   const navigate = useNavigate();
@@ -33,6 +36,15 @@ const Datatable = ({data}) => {
       }
       })
 
+      let active = crmList.filter(item => item.Status === "active");
+      setActiveData(active);
+
+      let sold = crmList.filter(item => item.Status === "sold");
+      setSoldData(sold)
+
+      let closed = crmList.filter(item => item.Status === "closed");
+      setClosedData(closed)
+   
       setFilterData(crmList)
       setCrmData(crmList)
   },[data])
@@ -148,10 +160,10 @@ const Datatable = ({data}) => {
         </div>
         </div>
         <div className={classes.datatableTitle}>
-            <div className={classes.filterLink} onClick={() => handleFilter("all")}>All</div>
-            <div className={classes.filterLink} onClick={() => handleFilter("active")}>Active</div>
-            <div className={classes.filterLink} onClick={() => handleFilter("sold")}>Sold</div>
-            <div className={classes.filterLink} onClick={() => handleFilter("closed")}>Closed</div>
+            <div className={classes.filterLink} onClick={() => handleFilter("all")}>All{`(${data.length})`}</div>
+            <div className={classes.filterLink} onClick={() => handleFilter("active")}>Active{`(${activeData.length})`}</div>
+            <div className={classes.filterLink} onClick={() => handleFilter("sold")}>Sold{`(${soldData.length})`}</div>
+            <div className={classes.filterLink} onClick={() => handleFilter("closed")}>Closed{`(${closedData.length})`}</div>
 
             <div className={classes.filterDate}>
             <label>Start Date</label>
