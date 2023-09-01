@@ -8,7 +8,6 @@ export const userColoumns = [
   {field: 'Source',headerName: 'Source',width: 100},
   {field: 'EnquiryType',headerName: 'Enquiry Type',width: 70},
   {field: 'Name',headerName: 'Name',width: 100},
-  {field: 'Address',headerName: 'Address',width: 90},
   {field: 'Contact',headerName: 'Contact',width: 110},
   {field: 'Email',headerName: 'Email',width: 120},
   {field: 'Product',headerName: 'Product',width: 130},
@@ -31,7 +30,7 @@ export const userColoumns = [
             return( `${classes.closed}`)
         }
     }
-}
+},
 
    
 ]

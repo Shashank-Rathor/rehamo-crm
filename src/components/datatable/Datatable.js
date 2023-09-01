@@ -19,6 +19,7 @@ const Datatable = ({data}) => {
   const [activeData,setActiveData] = useState([]);
    const [soldData,setSoldData] = useState([]);
    const [closedData,setClosedData] = useState([]);
+   const [clickedDiv, setClickedDiv] = useState('all');
   
   const yourParameter = useParams();
   const navigate = useNavigate();
@@ -71,6 +72,8 @@ const Datatable = ({data}) => {
   }
 
   const handleFilter = (type) => {
+
+    setClickedDiv(type);
 
     if(dateData.length == 0){
 
@@ -160,10 +163,10 @@ const Datatable = ({data}) => {
         </div>
         </div>
         <div className={classes.datatableTitle}>
-            <div className={classes.filterLink} onClick={() => handleFilter("all")}>All{`(${data.length})`}</div>
-            <div className={classes.filterLink} onClick={() => handleFilter("active")}>Active{`(${activeData.length})`}</div>
-            <div className={classes.filterLink} onClick={() => handleFilter("sold")}>Sold{`(${soldData.length})`}</div>
-            <div className={classes.filterLink} onClick={() => handleFilter("closed")}>Closed{`(${closedData.length})`}</div>
+            <div className={clickedDiv=== "all" ? classes.clickedLink :classes.filterLink} onClick={() => handleFilter("all")}>All{`(${data.length})`}</div>
+            <div className={clickedDiv=== "active" ? classes.clickedLink :classes.filterLink} onClick={() => handleFilter("active")}>Active{`(${activeData.length})`}</div>
+            <div className={clickedDiv=== "sold" ? classes.clickedLink :classes.filterLink} onClick={() => handleFilter("sold")}>Sold{`(${soldData.length})`}</div>
+            <div className={clickedDiv=== "closed" ? classes.clickedLink :classes.filterLink} onClick={() => handleFilter("closed")}>Closed{`(${closedData.length})`}</div>
 
             <div className={classes.filterDate}>
             <label>Start Date</label>

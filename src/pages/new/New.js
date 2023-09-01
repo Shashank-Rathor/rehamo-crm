@@ -27,7 +27,21 @@ const options = [
     'Pediatrics',
     'Hospital Care',
     'Incontinence',
-    'Complaint'
+    'Complaint',
+    'Information'
+  ];
+  const sourceoptions = [
+    'Select',
+    'Web Search',
+    'Old Client',
+    'Word Of Mouth',
+    'Generated',
+    'General',
+    'Deepak',
+    'Mahaveer',
+    'Abinash',
+    'Naveen',
+    'Indiamart'
   ];
   
 
@@ -215,7 +229,7 @@ const New = () => {
                         style={{color: "grey", border: "none"}}
                         />
                     </div>
-                    <div className={classes.formInput}>
+                    {/* <div className={classes.formInput}>
                         <label>Source</label>
                         <select 
                         id="source" 
@@ -228,7 +242,28 @@ const New = () => {
                             <option value="OldClient">Old Client</option>
                             <option value="WordOfMouth">Word Of Mouth</option>
                             <option value="Generated">Generated</option>
+                            <option value="General">General</option>
+                            <option value="Deepak">Deepak</option>
+                            <option value="Mahaveer">Mahaveer</option>
+                            <option value="Abinash">Abinash</option>
+                            <option value="Naveen">Naveen</option>
+                            <option value="Indiamart">Indiamart</option>
                         </select>
+                    </div> */}
+                    <div className={classes.formInput}>
+                    <Autocomplete
+                        id="source" 
+                        options={sourceoptions}
+                        getOptionLabel={(sourceoption) => sourceoption}
+                        value={formData.source}
+                        onChange={(event, newValue) =>  
+                            setFormData({
+                            ...formData,
+                            source: newValue,
+                          })
+                        }
+                        renderInput={(params) => <TextField {...params} label="Source" />}
+                    />
                     </div>
                     <div className={classes.formInput}>
                         <label>Enquiry Type</label>

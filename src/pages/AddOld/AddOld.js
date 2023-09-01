@@ -29,7 +29,8 @@ const options = [
   'Pediatrics',
   'Hospital Care',
   'Incontinence',
-  'Complaint'
+  'Complaint',
+  'Information'
 ];
 
 const AddOld = () => {

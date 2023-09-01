@@ -30,6 +30,19 @@ const options = [
     'Incontinence',
     'Complaint'
   ];
+  const sourceoptions = [
+    'Select',
+    'Web Search',
+    'Old Client',
+    'Word Of Mouth',
+    'Generated',
+    'General',
+    'Deepak',
+    'Mahaveer',
+    'Abinash',
+    'Naveen',
+    'Indiamart'
+  ];
 
 const Edit = () => {
     
@@ -214,7 +227,7 @@ const Edit = () => {
                         >
                         </input>
                     </div>
-                    <div className={classes.formInput}>
+                    {/* <div className={classes.formInput}>
                         <label>Source</label>
                         <select 
                         id="source" 
@@ -228,6 +241,21 @@ const Edit = () => {
                             <option value="WordOfMouth">Word Of Mouth</option>
                             <option value="Generated">Generated</option>
                         </select>
+                    </div> */}
+                    <div className={classes.formInput}>
+                    <Autocomplete
+                        id="source" 
+                        options={sourceoptions}
+                        getOptionLabel={(sourceoption) => sourceoption}
+                        value={formData.source}
+                        onChange={(event, newValue) =>  
+                            setFormData({
+                            ...formData,
+                            source: newValue,
+                          })
+                        }
+                        renderInput={(params) => <TextField {...params} label="Source" />}
+                    />
                     </div>
                     <div className={classes.formInput}>
                         <label>Enquiry Type</label>

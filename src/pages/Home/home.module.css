@@ -64,3 +64,11 @@
         font-size: 12px;
     }
 }
+.clickedLink{
+    cursor: pointer;
+    font-size: 15px;
+    background-color: gray;
+    color: white;
+    padding: 5px;
+    border-radius: 10px;
+}

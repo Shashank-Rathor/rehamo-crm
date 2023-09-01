@@ -65,6 +65,14 @@
     font-size: 15px;
     color: #2607d4;
 }
+.clickedLink{
+    cursor: pointer;
+    font-size: 15px;
+    background-color: gray;
+    color: white;
+    padding: 5px;
+    border-radius: 10px;
+}
 .filterDate{
     font-size: 15px;
 }

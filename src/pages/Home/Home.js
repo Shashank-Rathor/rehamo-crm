@@ -24,6 +24,7 @@ const Home = () => {
    const [sumClosed, setSumClosed] = useState("");
    const {data} = useContext(DataContext);
    const [searchInput, setSearchInput] = useState('');
+   const [clickedDiv, setClickedDiv] = useState('all');
 
    useEffect(() => {
     setFilterData(data)
@@ -81,6 +82,8 @@ const Home = () => {
    setFilterData(dataInRange)
  }
  const handleFilter = (type) => {
+  setClickedDiv(type);
+
   if(dateData.length == 0){
 
     if(type == "active"){
@@ -143,10 +146,10 @@ const Home = () => {
         </div>
          <div className={classes.datatableTitle}>
          <div className={classes.listTitle}>Enquiries</div>
-         <div className={classes.filterLink} onClick={() => handleFilter("all")}>All</div>
-            <div className={classes.filterLink} onClick={() => handleFilter("active")}>Active</div>
-            <div className={classes.filterLink} onClick={() => handleFilter("sold")}>Sold</div>
-            <div className={classes.filterLink} onClick={() => handleFilter("closed")}>Closed</div>
+         <div className={clickedDiv=== "all" ? classes.clickedLink :classes.filterLink} onClick={() => handleFilter("all")}>All</div>
+            <div className={clickedDiv=== "active" ? classes.clickedLink :classes.filterLink} onClick={() => handleFilter("active")}>Active</div>
+            <div className={clickedDiv=== "sold" ? classes.clickedLink :classes.filterLink} onClick={() => handleFilter("sold")}>Sold</div>
+            <div className={clickedDiv=== "closed" ? classes.clickedLink :classes.filterLink} onClick={() => handleFilter("closed")}>Closed</div>
          <div className={classes.filterDate}>
             <label>Start Date</label>
             <input type="date" id="startDate" value={startDate} onChange={(e) => handleStartDate(e)}/>
