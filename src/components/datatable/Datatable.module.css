@@ -52,6 +52,7 @@
     color: darkblue;
     border: 1px dotted rgba(0, 0, 139, 0.534);
     cursor: pointer;
+
 }
 .deleteButton{
     padding: 2px 5px;

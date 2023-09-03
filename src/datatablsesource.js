@@ -9,7 +9,6 @@ export const userColoumns = [
   {field: 'EnquiryType',headerName: 'Enquiry Type',width: 70},
   {field: 'Name',headerName: 'Name',width: 100},
   {field: 'Contact',headerName: 'Contact',width: 110},
-  {field: 'Email',headerName: 'Email',width: 120},
   {field: 'Product',headerName: 'Product',width: 130},
   {field: 'Revenue',headerName: 'Revenue',width: 100},
   {field: 'TypeOfPurchase',headerName: 'Type of Purchase',width: 70},

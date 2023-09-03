@@ -3,8 +3,13 @@ import classes from './Table.module.css';
 import { DataGrid } from '@mui/x-data-grid';
 import { userColoumns } from '../../datatablsesource';
 import { useNavigate } from 'react-router-dom';
+import Excelexport from '../../components/Excelexport';
+import ViewModal from '../viewModal/ViewModal';
 
 const List = ({data}) => {
+  const [selectedRows, setSelectedRows] = useState([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [viewData, setViewData] = useState(null);
 
   const navigate = useNavigate();
 
@@ -13,16 +18,30 @@ const List = ({data}) => {
     console.log(params.row.id)
     navigate(`/enquiry?id=${params.row.id}`)
   }
-  
+  const handleButtonClick = (event,id) => {
+    setIsModalOpen(true);
+    const selectedData = data.find(obj => obj.ID === id);
+    setViewData(selectedData);
+    event.stopPropagation();
+  };
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
+
+  const handleSelectionChange = (selection) => {
+    const selectedData = data.filter(row => selection.includes(row.ID));
+    setSelectedRows(selectedData);
+  };
   const actionColoumn = [
     {
-      field: "ReminderDate",
-      headerName: "Reminder Date",
-      width: 110,
+      field: "action",
+      headerName: "Action",
+      width: 70,
       renderCell:(params)=>{
         return(
           <div className={classes.cellAction}>
-            {params.row.ReminderDate ? <div> {params.row.ReminderDate}</div> : <div>No Reminder</div>}
+            <div className={classes.viewButton} onClick={(event) => handleButtonClick(event,params.row.id)}>View</div>
+              {/* <div className={classes.deleteButton} onClick={() => handleDelete(params.row.ID)}>Delete</div> */}
           </div>
         )
       }
@@ -31,17 +50,24 @@ const List = ({data}) => {
 
   return (
     <div style={{ height: 400, width: '100%' }}>
+      <Excelexport className={classes.link} data={selectedRows}/>
       <DataGrid
         rows={data}
         columns={userColoumns.concat(actionColoumn)}
         initialState={{
           pagination: {
-            paginationModel: { page: 0, pageSize: 10 },
+            paginationModel: { page: 0, pageSize: 20 },
           },
         }}
-        pageSizeOptions={[5, 10,20,50,100]}
+        pageSizeOptions={[60,80,100,120,150,200]}
         onRowClick={(params) => handleCellClick(params)}
-        // checkboxSelection
+        checkboxSelection
+        onRowSelectionModelChange={(selection) => handleSelectionChange(selection)}
+      />
+      <ViewModal
+      isOpen={isModalOpen} 
+      onClose={handleCloseModal}
+      viewData={viewData}
       />
     </div>
   )

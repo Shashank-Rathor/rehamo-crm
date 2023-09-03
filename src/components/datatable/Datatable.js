@@ -7,6 +7,7 @@ import Excelexport from '../../components/Excelexport';
 import { useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import SearchIcon from '@mui/icons-material/Search';
+import ViewModal from '../viewModal/ViewModal';
 
 const Datatable = ({data}) => {
   const [filterData, setFilterData] = useState([]);
@@ -20,7 +21,9 @@ const Datatable = ({data}) => {
    const [soldData,setSoldData] = useState([]);
    const [closedData,setClosedData] = useState([]);
    const [clickedDiv, setClickedDiv] = useState('all');
-  
+   const [isModalOpen, setIsModalOpen] = useState(false);
+   const [viewData, setViewData] = useState(null);
+
   const yourParameter = useParams();
   const navigate = useNavigate();
 
@@ -40,7 +43,7 @@ const Datatable = ({data}) => {
       let active = crmList.filter(item => item.Status === "active");
       setActiveData(active);
 
-      let sold = crmList.filter(item => item.Status === "sold");
+     let sold = crmList.filter(item => item.Status === "sold");
       setSoldData(sold)
 
       let closed = crmList.filter(item => item.Status === "closed");
@@ -48,10 +51,24 @@ const Datatable = ({data}) => {
    
       setFilterData(crmList)
       setCrmData(crmList)
+      setdateDate(crmList)
   },[data])
+  
+  useEffect(() => {
+    let active = filterData.filter(item => item.Status === "active");
+       setActiveData(active);
+ 
+    let sold = filterData.filter(item => item.Status === "sold");
+       setSoldData(sold)
+ 
+    let closed = filterData.filter(item => item.Status === "closed");
+       setClosedData(closed)
+    
+   },[dateData])
 
   const handleSelectionChange = (selection) => {
-    console.log(selection)
+    const selectedData = filterData.filter(row => selection.includes(row.ID));
+    setSelectedRows(selectedData);
   };
 
   const handleSearch = (e) => {
@@ -70,6 +87,13 @@ const Datatable = ({data}) => {
     console.log(params.row.id)
     navigate(`/enquiry?id=${params.row.id}`)
   }
+
+  const handleButtonClick = (event,id) => {
+    setIsModalOpen(true);
+    const selectedData = filterData.find(obj => obj.ID === id);
+    setViewData(selectedData);
+    event.stopPropagation();
+  };
 
   const handleFilter = (type) => {
 
@@ -108,7 +132,7 @@ const Datatable = ({data}) => {
       setFilterData(closed)
     }
     else if(type == "all"){
-      setFilterData(crmData)
+      setFilterData(dateData)
     } 
   }
   }
@@ -119,6 +143,9 @@ const Datatable = ({data}) => {
   const handleEndDate = (e) => {
     setEndDate(e.target.value);
   }
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
   const handleFilterDate = () => {
 
     const dataInRange = crmData.filter(item => {
@@ -134,13 +161,11 @@ const Datatable = ({data}) => {
     {
       field: "action",
       headerName: "Action",
-      width: 140,
+      width: 70,
       renderCell:(params)=>{
         return(
           <div className={classes.cellAction}>
-            <Link to={`/enquiry?id=${params.row.ID}`}style={{textDecoration:"none"}}>
-            <div className={classes.viewButton}>View</div>
-            </Link>
+            <div className={classes.viewButton} onClick={(event) => handleButtonClick(event,params.row.id)}>View</div>
               {/* <div className={classes.deleteButton} onClick={() => handleDelete(params.row.ID)}>Delete</div> */}
           </div>
         )
@@ -163,7 +188,7 @@ const Datatable = ({data}) => {
         </div>
         </div>
         <div className={classes.datatableTitle}>
-            <div className={clickedDiv=== "all" ? classes.clickedLink :classes.filterLink} onClick={() => handleFilter("all")}>All{`(${data.length})`}</div>
+            <div className={clickedDiv=== "all" ? classes.clickedLink :classes.filterLink} onClick={() => handleFilter("all")}>All{`(${dateData.length === 0 ? crmData.length: dateData.length})`}</div>
             <div className={clickedDiv=== "active" ? classes.clickedLink :classes.filterLink} onClick={() => handleFilter("active")}>Active{`(${activeData.length})`}</div>
             <div className={clickedDiv=== "sold" ? classes.clickedLink :classes.filterLink} onClick={() => handleFilter("sold")}>Sold{`(${soldData.length})`}</div>
             <div className={clickedDiv=== "closed" ? classes.clickedLink :classes.filterLink} onClick={() => handleFilter("closed")}>Closed{`(${closedData.length})`}</div>
@@ -177,7 +202,7 @@ const Datatable = ({data}) => {
             <input type="date" id="endDate" value={endDate} onChange={(e) => handleEndDate(e)}/>
             </div>
             <div className={classes.link} onClick={() => handleFilterDate()}>FIlter</div>
-            <Excelexport className={classes.link} data={filterData}/>
+            <Excelexport className={classes.link} data={selectedRows}/>
         </div>
          <DataGrid
         rows={filterData}
@@ -189,9 +214,13 @@ const Datatable = ({data}) => {
         }}
         pageSizeOptions={[60,80,100,120,150,200]}
         onRowClick={(params) => handleCellClick(params)}
-        // checkboxSelection
-        // selectionModel={selectedRows}
-        // onSelectionModelChange={(selection) => handleSelectionChange(selection)}
+        checkboxSelection
+        onRowSelectionModelChange={(selection) => handleSelectionChange(selection)}
+      />
+      <ViewModal
+      isOpen={isModalOpen} 
+      onClose={handleCloseModal}
+      viewData={viewData}
       />
     </div>
   )

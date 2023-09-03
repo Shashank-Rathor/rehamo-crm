@@ -1,0 +1,74 @@
+.modaloverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .modalcontent {
+    background-color: white;
+    padding: 20px;
+    padding-bottom: 40px;
+    border-radius: 8px;
+    width: 600px;
+    height: 350px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+  }
+    
+  .closebutton {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: white;
+    float: right;
+    background-color: #888;
+    width: 8vw;
+    height: 2vw;
+    border-radius: 10px;
+  }
+  .mainContainer{
+    margin-top: 2%;
+    display: flex;
+    justify-content: space-between;
+  }
+  .mainContainer div{
+    width: 200px;
+  }
+  .remarksHeader{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgba(211, 211, 211, 0.486);
+    padding: 5px;
+    border-radius: 5px;
+    width: 95%;
+    margin-bottom: 10px;
+}
+.remarkValue{
+    display: block;
+    list-style: none;
+}
+.remarkValue:hover{
+    background-color: transparent;
+}
+.remarksContainer{
+    display: flex;
+    margin-top: 5%;
+    margin-left: -1%;
+}
+.remarksLeft{
+    flex: 1.5;
+}
+.remarksRight{
+    flex: 1;
+}
+.detailItem{
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+  margin: 0px;
+}
