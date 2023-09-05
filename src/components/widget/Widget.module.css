@@ -42,3 +42,25 @@
     border-radius: 5px;
     align-self: flex-end;
 }
+@media (max-width: 768px){
+    .widget{
+        display: flex;
+        flex: 1;
+        padding: 15px;
+        justify-content: space-between;
+        height: 60px;
+        width: 30%;
+    }
+    .title{
+        font-weight: bold;
+        font-size: 10px;
+        color: rgb(160, 160,160);
+    }
+    .counter{
+        font-size: 15px;
+        font-weight: 300;
+    }
+    .icon{
+        display: none !important;
+    }
+}

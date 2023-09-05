@@ -14,9 +14,13 @@ const Sidebar = () => {
   const {currentUser} = useContext(AuthContext);
   const [admin,setAdmin] = useState("")
   const isAdmin = JSON.parse(localStorage.getItem("Admin"))
+  const [isOpen, setIsOpen] = useState(false);  
 
   const navigate = useNavigate();
   
+  const toggleSidebar = () => {
+    setIsOpen(!isOpen);
+  };
 
 
   const handleLogout = () => {               
@@ -30,7 +34,12 @@ const Sidebar = () => {
     });
 }
   return (
-    <div className={classes.sidebar}>
+    <div className={`${classes.sidebar} ${isOpen ? classes.open : ''}`}>
+      <div className={classes.sidebarConatiner} onClick={toggleSidebar}>
+        <div className={classes.sidebarPanel}>
+          <span className={classes.panelText}>Sidebar</span>
+        </div>
+      </div>
         <div className={classes.top}>
            <Link to="/" style={{textDecoration:"none"}}>
            <span className={classes.logo}>Rehamo</span>

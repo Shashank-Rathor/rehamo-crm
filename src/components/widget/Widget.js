@@ -115,7 +115,6 @@ const Widget = ({type, closedData,activeData, soldData,list,activeRevenue,soldRe
             <div className={classes.percentage}>
                {data.percent}
             </div>
-            {data.icon}
         </div>
     </div>
   )
