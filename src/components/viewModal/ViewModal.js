@@ -14,8 +14,8 @@ const ViewModal = ({isOpen, onClose,viewData}) => {
           Close
         </button>
         {viewData ?
-        <>
-        <div className={classes.mainContainer} style={{marginTop: "8%"}}>
+        <div className={classes.dataContainer}>
+        <div className={classes.mainContainer} >
         <div><strong>ID:</strong> {viewData.ID}</div>
         <div><strong>Date:</strong> {viewData.Date }</div>
         <div><strong>Name:</strong> {viewData.Name}</div> 
@@ -54,7 +54,7 @@ const ViewModal = ({isOpen, onClose,viewData}) => {
                         </ul>
                     </div>  
               </div>
-        </> : <></>}
+        </div> : <></>}
         </div>
     </div>
   )

@@ -19,11 +19,12 @@
 .title{
     font-weight: bold;
     font-size: 14px;
-    color: rgb(160, 160,160);
+    color: rgb(68, 68, 68);
 }
 .counter{
     font-size: 20px;
     font-weight: 300;
+    color: rgb(68, 68, 68);
 }
 .link{
     cursor: pointer;
@@ -54,7 +55,6 @@
     .title{
         font-weight: bold;
         font-size: 10px;
-        color: rgb(160, 160,160);
     }
     .counter{
         font-size: 15px;

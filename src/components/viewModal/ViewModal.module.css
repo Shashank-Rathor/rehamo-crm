@@ -72,3 +72,25 @@
   flex-direction: column;
   margin: 0px;
 }
+.dataContainer{
+  margin-top: 8%;
+}
+@media (max-width: 768px){
+  .modalcontent {
+    width: 80%;
+    height: 400px;
+  }
+  .closebutton{
+    width: 18vw;
+    height: 10vw;
+  }
+  .remarksContainer{
+    margin-left: -2%;
+}
+.dataContainer{
+  margin-top: 18%;
+}
+.mainContainer div{
+  font-size: 15px;
+}
+}

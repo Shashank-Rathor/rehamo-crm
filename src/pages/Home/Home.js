@@ -129,13 +129,13 @@ const Home = () => {
       <div className={classes.container}>
         <Navbar data={data}/>
          <div className={classes.widgets}>
-            <Widget type="active" activeData={activeData} />
-            <Widget type="sold" soldData={soldData}/>
-            <Widget type="closed" closedData={closedData}/>
-            <Widget type="total" list={filterData}/>
-            <Widget type="revenueGenerated" list={filterData} soldRevenue={sumSold}/>
-            <Widget type="revenueMissed" list={filterData} closedRevenue={sumClosed}/>
-            <Widget type="revenueExpected" list={filterData} activeRevenue={sumActive}/>
+            <Widget type="active"  style={{backgroundColor: "rgb(255, 225, 168) "}} activeData={activeData} />
+            <Widget type="sold"  style={{backgroundColor: "rgb(175, 255, 175) "}}  soldData={soldData}/>
+            <Widget type="closed" style={{backgroundColor: "rgb(255, 178, 178)"}}  closedData={closedData}/>
+            <Widget type="total" style={{backgroundColor: "rgb(188, 228, 255)"}} list={filterData}/>
+            <Widget type="revenueGenerated" style={{backgroundColor: "rgb(188, 228, 255)"}} list={filterData} soldRevenue={sumSold}/>
+            <Widget type="revenueMissed" style={{backgroundColor: "rgb(188, 228, 255)"}} list={filterData} closedRevenue={sumClosed}/>
+            <Widget type="revenueExpected" style={{backgroundColor: "rgb(188, 228, 255)"}} list={filterData} activeRevenue={sumActive}/>
          </div>
          {/* <CrmDashboard data={data}/> */}
          <div className={classes.listContainer}>
@@ -145,10 +145,12 @@ const Home = () => {
         </div>
          <div className={classes.datatableTitle}>
          <div className={classes.listTitle}>Enquiries</div>
+         <div className={classes.filters}>
          <div className={clickedDiv=== "all" ? classes.clickedLink :classes.filterLink} onClick={() => handleFilter("all")}>All</div>
             <div className={clickedDiv=== "active" ? classes.clickedLink :classes.filterLink} onClick={() => handleFilter("active")}>Active</div>
             <div className={clickedDiv=== "sold" ? classes.clickedLink :classes.filterLink} onClick={() => handleFilter("sold")}>Sold</div>
             <div className={clickedDiv=== "closed" ? classes.clickedLink :classes.filterLink} onClick={() => handleFilter("closed")}>Closed</div>
+         </div>
          <div className={classes.filterDate}>
             <label>Start Date</label>
             <input type="date" id="startDate" value={startDate} onChange={(e) => handleStartDate(e)}/>

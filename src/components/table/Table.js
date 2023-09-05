@@ -49,17 +49,18 @@ const List = ({data}) => {
   ]
 
   return (
-    <div style={{ height: 400, width: '100%' }}>
+    <div className={classes.table}>
       <Excelexport className={classes.link} data={selectedRows}/>
       <DataGrid
+        className={classes.dataGrid}
         rows={data}
         columns={userColoumns.concat(actionColoumn)}
         initialState={{
           pagination: {
-            paginationModel: { page: 0, pageSize: 20 },
+            paginationModel: { page: 0, pageSize: 10 },
           },
         }}
-        pageSizeOptions={[60,80,100,120,150,200]}
+        pageSizeOptions={[20,50,100,120,150,200]}
         onRowClick={(params) => handleCellClick(params)}
         checkboxSelection
         onRowSelectionModelChange={(selection) => handleSelectionChange(selection)}

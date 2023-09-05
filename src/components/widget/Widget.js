@@ -5,7 +5,7 @@ import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import CancelIcon from '@mui/icons-material/Cancel';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 
-const Widget = ({type, closedData,activeData, soldData,list,activeRevenue,soldRevenue,closedRevenue}) => {
+const Widget = ({type, closedData,activeData, soldData,list,activeRevenue,soldRevenue,closedRevenue, style}) => {
     let data;
 
         switch(type){
@@ -105,7 +105,7 @@ const Widget = ({type, closedData,activeData, soldData,list,activeRevenue,soldRe
         }
 
   return (
-    <div className={classes.widget}>
+    <div className={classes.widget} style={style}>
         <div className={classes.left}>
             <span className={classes.title}>{data.title}</span>
             <span className={classes.counter}>{data.count}</span>

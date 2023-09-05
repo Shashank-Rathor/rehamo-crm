@@ -83,7 +83,7 @@ span{
     .sidebarConatiner{ 
         position: absolute;
         top: 40%;
-        right: -38%;
+        left: 76%;
         display: flex;
         flex-direction: column;
         align-items: center; /* Optional: Center contents horizontally */
