@@ -188,11 +188,12 @@ const Datatable = ({data}) => {
         </div>
         </div>
         <div className={classes.datatableTitle}>
+        <div className={classes.filters}>
             <div className={clickedDiv=== "all" ? classes.clickedLink :classes.filterLink} onClick={() => handleFilter("all")}>All{`(${dateData.length === 0 ? crmData.length: dateData.length})`}</div>
             <div className={clickedDiv=== "active" ? classes.clickedLink :classes.filterLink} onClick={() => handleFilter("active")}>Active{`(${activeData.length})`}</div>
             <div className={clickedDiv=== "sold" ? classes.clickedLink :classes.filterLink} onClick={() => handleFilter("sold")}>Sold{`(${soldData.length})`}</div>
             <div className={clickedDiv=== "closed" ? classes.clickedLink :classes.filterLink} onClick={() => handleFilter("closed")}>Closed{`(${closedData.length})`}</div>
-
+        </div>
             <div className={classes.filterDate}>
             <label>Start Date</label>
             <input type="date" id="startDate" value={startDate} onChange={(e) => handleStartDate(e)}/>
@@ -201,8 +202,10 @@ const Datatable = ({data}) => {
             <label>End Date</label>
             <input type="date" id="endDate" value={endDate} onChange={(e) => handleEndDate(e)}/>
             </div>
+            <div className={classes.linkDiv}> 
             <div className={classes.link} onClick={() => handleFilterDate()}>FIlter</div>
-            <Excelexport className={classes.link} data={selectedRows}/>
+            <Excelexport className={classes.excelLink} data={selectedRows}/>
+            </div>
         </div>
          <DataGrid
         rows={filterData}

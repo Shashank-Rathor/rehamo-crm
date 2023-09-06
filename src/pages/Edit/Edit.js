@@ -242,7 +242,7 @@ const Edit = () => {
                             <option value="Generated">Generated</option>
                         </select>
                     </div> */}
-                    <div className={classes.formInput}>
+                    <div className={classes.formSelection}>
                     <Autocomplete
                         id="source" 
                         options={sourceoptions}
@@ -314,7 +314,7 @@ const Edit = () => {
                         onChange={handleInput}
                         />
                     </div>
-                    <div className={classes.formInput} style={{display: "flex"}}>
+                    <div className={classes.formContact} >
                         <label>Contact</label>
                         <input 
                         id="contact" 
@@ -392,7 +392,7 @@ const Edit = () => {
                         onChange={handleInput}
                         />
                     </div>
-                    <div className={classes.formInput}>
+                    <div className={classes.formSelection}>
                     <Autocomplete
                         id="category" 
                         options={options}
@@ -424,7 +424,7 @@ const Edit = () => {
                         <label >Remarks</label>
                         <ul style={{paddingLeft: "0px",marginTop: "10px"}}>
                          {dataArray.map((data, index) => (
-                            <li key={index}>
+                            <li key={index} className={classes.remarksDateTime}>
                              <b>Date: </b> {data.input1}, <b>CRM:</b>{data.input3}, <b>Remarks:</b> {data.input2}
                             </li>
                          ))}

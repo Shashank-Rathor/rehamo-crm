@@ -331,7 +331,7 @@ const AddOld = () => {
                         style={{color: "grey", border: "none"}}
                         />
                     </div>
-                    <div className={classes.formInput} style={{display: "flex"}}>
+                    <div className={classes.formContact}>
                         <label>Contact</label>
                         <input 
                         id="contact" 
@@ -410,7 +410,7 @@ const AddOld = () => {
                         onChange={handleInput}
                         />
                     </div>
-                    <div className={classes.formInput}>
+                    <div className={classes.formSelection}>
                     <Autocomplete
                         id="category" 
                         options={options}
@@ -442,7 +442,7 @@ const AddOld = () => {
                         <label >Remarks </label>
                         <ul style={{padding: "0"}}>
                          {dataArray.map((data, index) => (
-                            <li key={index}>
+                            <li key={index}  className={classes.remarksDateTime}>
                              <b>Date: </b> {data.input1}, <b>CRM:</b>{data.input3}, <b>Remarks:</b> {data.input2}
                             </li>
                          ))}

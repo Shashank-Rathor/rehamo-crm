@@ -26,3 +26,15 @@
     color: #888;
     float: right;
   }
+  @media (max-width: 768px){
+    .notificationContainer{
+        width: 70vw;
+    }
+    .notifyTitle{
+        font-size:  15px;
+        margin-left: 0;
+    }
+    .closebutton {
+        font-size:  15px;
+      }
+  }

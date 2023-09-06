@@ -5,3 +5,10 @@
 .enquiriescontainer{
     flex: 6;
 }
+@media (max-width: 768px){
+    .enquiriescontainer{
+        flex: 1;
+        width: 90%;
+        padding-left: 4%;
+    }
+}

@@ -19,7 +19,9 @@ const Notifications = ({data,handleNotification}) => {
        <div className={classes.notifyList}>
         <ul style={{padding: "0px"}}>
           {data.map((item) => (
+            <>
             <Link  style={{textDecoration:"none", color: "gray"}}to = {`/enquiry?id=${item.ID}`}><li> <PersonIcon/> Name: {item.Name}<br/>Product: {item.Product}</li></Link>
+            <hr/></>
           ))}
           </ul>
         </div> :<></>}

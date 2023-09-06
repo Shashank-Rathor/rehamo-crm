@@ -79,9 +79,6 @@
     align-items: center;
 }
 @media (max-width: 768px){
-    .listContainer{
-       
-    }
     .container{
         width:  100%;
     }

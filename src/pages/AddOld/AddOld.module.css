@@ -36,6 +36,13 @@ input{
     border: none;
     border-bottom: 1px solid gray;
 }
+.formSelection{
+    width: 40%;
+}
+.formContact{
+    display: flex;
+    width: 40%;
+}
 label{
     display: flex;
     align-items: center;
@@ -72,4 +79,25 @@ select{
 .remarksInput{
     width: 95%;
     margin: 0 0 10px 0;
+}
+@media (max-width: 768px){
+    .remarksDateTime{
+        font-size: 12px;
+        display: flex;
+        flex-wrap: wrap;
+    }
+    .remarksInput{
+        margin-top: 35%;
+    }
+    .formInput{
+        font-size: 15px;
+    }
+    .formSelection{
+        width: 40%;
+    }
+    .formContact{
+        display: flex;
+        flex-wrap: wrap;
+        width: 40%;
+    }
 }
