@@ -83,11 +83,10 @@ span{
     .sidebarConatiner{ 
         position: absolute;
         top: 40%;
-        left: 75%;
+        left: 70%;
         display: flex;
         flex-direction: column;
         align-items: center; /* Optional: Center contents horizontally */
-        justify-content: center; /* Optional: Center contents vertically */
         height: 10vw; /* Optional: Set the height to fill the viewport */
         width: fit-content;
         background-color: #f0f0f0;
