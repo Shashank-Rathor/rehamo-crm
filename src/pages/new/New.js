@@ -57,6 +57,8 @@ const New = () => {
         source:'',
         enquirytype:'',
         name: '',
+        companyname:'',
+        gst:'',
         address: '',
         city:'',
         pincode:'',
@@ -149,6 +151,8 @@ const New = () => {
                     Source: formData.source,
                     EnquiryType: formData.enquirytype,
                     Name: formData.name,
+                    CompanyName: formData.companyname || null,
+                    GST: formData.gst || null,
                     Address: formData.address || null,
                     City: formData.city || null,
                     Pincode: formData.pincode || null,
@@ -293,6 +297,26 @@ const New = () => {
                         />
                     </div>
                     <div className={classes.formInput}>
+                        <label>Company Name</label>
+                        <input 
+                        id="companyname" 
+                        type="text" 
+                        placeholder='company name'
+                        value={formData.companyname}
+                        onChange={handleInput}
+                        />
+                    </div>
+                    <div className={classes.formInput}>
+                        <label>GST</label>
+                        <input 
+                        id="gst" 
+                        type="text" 
+                        placeholder='gst'
+                        value={formData.gst}
+                        onChange={handleInput}
+                        />
+                    </div>
+                    <div className={classes.formInput}>
                         <label>Address</label>
                         <input 
                         id="address" 
@@ -360,11 +384,13 @@ const New = () => {
                         onChange={handleInput}
                         >
                             <option value="Default">Select</option>
+                            <option value="NA">NA</option>
                             <option value="Shop">Shop</option>
                             <option value="Rent">Rent</option>
                             <option value="Customized">Customized</option>
                             <option value="Repair">Repair</option>
                             <option value="Marketing">Marketing</option>
+                            <option value="Information">Information</option>
                         </select>
                     </div>
                     <div className={classes.formInput}>

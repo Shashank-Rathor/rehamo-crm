@@ -45,6 +45,8 @@ const AddOld = () => {
         source:'',
         enquirytype:'',
         name: '',
+        companyname: '',
+        gst: '',
         address: '',
         city:'',
         pincode:'',
@@ -110,6 +112,8 @@ const AddOld = () => {
           if(res){
               setFormData({
                   name: res.data().Name,
+                  companyname: res.data().CompanyName,
+                  gst: res.data().GST,
                   date: getFormattedDate(),
                   crm: user.displayName,
                   source: "OldClient",
@@ -170,6 +174,8 @@ const AddOld = () => {
                     Source: formData.source,
                     EnquiryType: formData.enquirytype,
                     Name: formData.name,
+                    CompanyName: formData.companyname || null,
+                    GST: formData.gst || null,
                     Address: formData.address || null,
                     City: formData.city || null,
                     Pincode: formData.pincode || null,
@@ -299,6 +305,26 @@ const AddOld = () => {
                         />
                     </div>
                     <div className={classes.formInput}>
+                        <label>Company Name</label>
+                        <input 
+                        id="companyname" 
+                        type="text" 
+                        placeholder='company name'
+                        value={formData.companyname}
+                        onChange={handleInput}
+                        />
+                    </div>
+                    <div className={classes.formInput}>
+                        <label>GST</label>
+                        <input 
+                        id="gst" 
+                        type="text" 
+                        placeholder='gst'
+                        value={formData.gst}
+                        onChange={handleInput}
+                        />
+                    </div>
+                    <div className={classes.formInput}>
                         <label>Address</label>
                         <input 
                         id="address" 
@@ -369,6 +395,8 @@ const AddOld = () => {
                         onChange={handleInput}
                         >
                             <option value="Default">Select</option>
+                            <option value="NA">NA</option>
+                            <option value="Information">Information</option>
                             <option value="Shop">Shop</option>
                             <option value="Rent">Rent</option>
                             <option value="Customized">Customized</option>

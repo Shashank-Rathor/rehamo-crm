@@ -57,6 +57,8 @@ const Edit = () => {
         source:'',
         enquirytype:'',
         name: '',
+        companyname:'',
+        gst:'',
         address: '',
         city: '',
         pincode: '',
@@ -98,6 +100,8 @@ const Edit = () => {
                 setData(res.data())
                 setFormData({
                     name: res.data().Name,
+                    companyname: res.data().CompanyName,
+                    gst: res.data().GST,
                     date: res.data().Date,
                     crm: res.data().Crm,
                     source: res.data().Source,
@@ -147,6 +151,8 @@ const Edit = () => {
                     Source: formData.source,
                     EnquiryType: formData.enquirytype,
                     Name: formData.name,
+                    CompanyName: formData.companyname || null,
+                    GST: formData.gst || null,
                     Address: formData.address || null,
                     City: formData.city || null,
                     Pincode: formData.pincode || null,
@@ -285,6 +291,26 @@ const Edit = () => {
                         />
                     </div>
                     <div className={classes.formInput}>
+                        <label>Company Name</label>
+                        <input 
+                        id="companyname" 
+                        type="text" 
+                        placeholder='company name'
+                        value={formData.companyname}
+                        onChange={handleInput}
+                        />
+                    </div>
+                    <div className={classes.formInput}>
+                        <label>GST</label>
+                        <input 
+                        id="gst" 
+                        type="text" 
+                        placeholder='gst'
+                        value={formData.gst}
+                        onChange={handleInput}
+                        />
+                    </div>
+                    <div className={classes.formInput}>
                         <label>Address</label>
                         <input 
                         id="address" 
@@ -351,6 +377,8 @@ const Edit = () => {
                         onChange={handleInput}
                         >
                             <option value="Default">Select</option>
+                            <option value="NA">NA</option>
+                            <option value="Information">Information</option>
                             <option value="Shop">Shop</option>
                             <option value="Rent">Rent</option>
                             <option value="Customized">Customized</option>
