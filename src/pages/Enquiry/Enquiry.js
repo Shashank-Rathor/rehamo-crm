@@ -126,6 +126,12 @@ const [order_id, setOrderID] = useState('');
                       <span className={classes.itemKey}>Name: <span>{data.Name}</span></span>
                     </div>
                     <div className={classes.detailItem}>
+                      <span className={classes.itemKey}>Company Name: <span>{data.CompanyName}</span></span>
+                    </div>
+                    <div className={classes.detailItem}>
+                      <span className={classes.itemKey}>GST: <span>{data.GST}</span></span>
+                    </div>
+                    <div className={classes.detailItem}>
                       <span className={classes.itemKey}>Address: <span>{data.Address}</span></span>
                     </div>
                     <div className={classes.detailItem}>
@@ -156,9 +162,13 @@ const [order_id, setOrderID] = useState('');
                       <span className={classes.itemKey}>Revenue: <span>Rs. {data.Revenue}</span></span>
                     </div>
                     {data.ReminderDate !== null ? 
+                    <>
                     <div className={classes.detailItem}>
                     <span className={classes.itemKey}>Reminder Date: <span>{data.ReminderDate}</span></span>
-                  </div>:<></>}
+                  </div>
+                  <div className={classes.detailItem}>
+                    
+                  </div></>:<></>}
                     
                 </div>
               </div>

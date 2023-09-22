@@ -19,7 +19,12 @@ const ViewModal = ({isOpen, onClose,viewData}) => {
         <div><strong>ID:</strong> {viewData.ID}</div>
         <div><strong>Date:</strong> {viewData.Date }</div>
         <div><strong>Name:</strong> {viewData.Name}</div> 
-        </div> 
+        </div>  
+        <div className={classes.mainContainer} >
+        <div><strong>CompanyName:</strong> {viewData.CompanyName}</div>
+        <div><strong>GST:</strong> {viewData.GST }</div>
+        <div/>
+        </div>
         <div className={classes.mainContainer}>
         <div><strong>Source:</strong> {viewData.Source}</div>
         <div><strong>CRM:</strong> {viewData.Crm}</div>
