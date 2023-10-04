@@ -170,7 +170,8 @@ const Datatable = ({data}) => {
           </div>
         )
       }
-    }
+    },
+    {field: 'ReminderDate',headerName: 'Reminder Date',width: 80}
   ]
 
   return (

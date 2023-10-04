@@ -45,7 +45,8 @@ const List = ({data}) => {
           </div>
         )
       }
-    }
+    },
+    {field: 'ReminderDate',headerName: 'Reminder Date',width: 70}
   ]
 
   return (

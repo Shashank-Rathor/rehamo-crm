@@ -37,11 +37,13 @@ const options = [
     'Word Of Mouth',
     'Generated',
     'General',
-    'Deepak',
+    'Deepak Bafna',
+    'Sunil Bafna',
     'Mahaveer',
     'Abinash',
     'Naveen',
-    'Indiamart'
+    'Indiamart',
+    "PSSPL",
   ];
 
 const Edit = () => {
