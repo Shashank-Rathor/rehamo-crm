@@ -35,7 +35,7 @@ useEffect(() => {
 
 
       if(item.Crm === currentUser.displayName){
-      if(day == todayDay && month == todayMonth && year == todayYear ){
+      if((day == todayDay && month == todayMonth && year == todayYear)|| (day < todayDay && item.Status === "active") ){
         notificationList.push({...item})
       }
     }
