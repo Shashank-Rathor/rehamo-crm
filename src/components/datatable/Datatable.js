@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState,useContext } from 'react';
 import classes from './Datatable.module.css';
 import { DataGrid } from '@mui/x-data-grid';
 import {userColoumns, userRows} from '../../datatablsesource';
+import { DataContext } from '../../components/context/DataContext';
 import { Link } from 'react-router-dom';
 import Excelexport from '../../components/Excelexport';
 import { useParams } from 'react-router-dom';
@@ -9,7 +10,7 @@ import { useNavigate } from 'react-router-dom';
 import SearchIcon from '@mui/icons-material/Search';
 import ViewModal from '../viewModal/ViewModal';
 
-const Datatable = ({data}) => {
+const Datatable = () => {
   const [filterData, setFilterData] = useState([]);
   const [crmData, setCrmData] = useState([]);
   const [startDate, setStartDate] = useState(null);
@@ -23,6 +24,7 @@ const Datatable = ({data}) => {
    const [clickedDiv, setClickedDiv] = useState('all');
    const [isModalOpen, setIsModalOpen] = useState(false);
    const [viewData, setViewData] = useState(null);
+   const {data} = useContext(DataContext);
 
   const yourParameter = useParams();
   const navigate = useNavigate();
@@ -48,7 +50,6 @@ const Datatable = ({data}) => {
 
       let closed = crmList.filter(item => item.Status === "closed");
       setClosedData(closed)
-   
       setFilterData(crmList)
       setCrmData(crmList)
       setdateDate(crmList)
@@ -83,8 +84,6 @@ const Datatable = ({data}) => {
     setSearchInput(searchTerm);
   };
   const handleCellClick = (params) => {
-
-    console.log(params.row.id)
     navigate(`/enquiry?id=${params.row.id}`)
   }
 

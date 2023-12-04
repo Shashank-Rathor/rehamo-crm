@@ -11,6 +11,7 @@ const Login = () => {
     const [email,setEmail] = useState("");
     const [password,setPassword] = useState("");
     const {checkAdmin} = useContext(DataContext);
+    const {handleLoginData} = useContext(DataContext);
 
     const navigate = useNavigate()
 
@@ -26,6 +27,7 @@ const Login = () => {
           console.log(user)
           dispatch({type:"LOGIN", payload:user})
           checkAdmin(email)
+          handleLoginData();
           navigate("/")
         })
         .catch((error) => {

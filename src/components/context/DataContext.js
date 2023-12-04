@@ -6,27 +6,51 @@ export const DataContext = React.createContext();
 
 export class DataProvider extends Component {
     state = {
-        data: [],
+        data: JSON.parse(localStorage.getItem("data")) ,
         users: [],
+        shouldFetch: true,
         isAdmin: JSON.parse(localStorage.getItem("Admin")) 
     };
 
-    async fetch (){
+     fetch = async() => {
         let list = []
       try{
         const querySnapshot = await getDocs(collection(db, "enquiries"));
       querySnapshot.forEach((doc) => {
         list.push({id: doc.id, ...doc.data()});
       });
-      this.setState({data: list.reverse()})
-      
+      this.setState({data: list.reverse()});
+      this.setState({shouldFetch: false});
+      const jsonData = JSON.stringify(list);
+      localStorage.setItem('data', jsonData);
+      console.log("run function")
       }
       catch(err){
         console.log(err)
       }
     }
 
-     async fetchUsers() {
+    addNewData = async(data) => {
+      const currentData = JSON.parse(localStorage.getItem("data")) 
+      const newdata = [data,...currentData]
+      const jsonData = JSON.stringify(newdata);
+      localStorage.setItem('data', jsonData);
+      this.setState((prevState) => ({
+        data: [data,...prevState.data]
+      }))
+    }
+
+    editData = async(data) => {
+      const currentData = JSON.parse(localStorage.getItem("data")); 
+      const index = currentData.findIndex((item) => item.ID === data.ID)
+      currentData[index] = data;
+      const jsonData = JSON.stringify(currentData);
+      localStorage.setItem('data', jsonData);
+      this.setState({data: currentData})
+    }
+
+
+    fetchUsers = async() => {
       let list = []
 
       try{
@@ -57,15 +81,13 @@ export class DataProvider extends Component {
     }
 
     componentDidMount(){
-        this.fetch();
         this.fetchUsers();
     }
 
-    // componentDidUpdate(){
-    //   this.fetch();
-    //   this.fetchUsers();
-    // }
 
+    handleLoginData = async() => {
+      this.fetch();
+    }
 
     handleDelete = async(id) =>{
         try{
@@ -80,11 +102,11 @@ export class DataProvider extends Component {
 
     render(){
         const {data,users,isAdmin} = this.state;
-        const {handleDelete,checkAdmin} = this;
+        const {handleDelete,checkAdmin,addNewData,editData,handleLoginData} = this;
         return (
 
             <DataContext.Provider 
-            value={{data,users,checkAdmin,isAdmin,handleDelete}}>
+            value={{data,users,checkAdmin,isAdmin,handleDelete,addNewData,editData,handleLoginData}}>
                 {this.props.children}
             </DataContext.Provider>
         )

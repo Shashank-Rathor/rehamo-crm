@@ -60,6 +60,8 @@
     display: flex;
     margin-top: 5%;
     margin-left: -1%;
+    overflow-y: scroll;
+    height: 100px;
 }
 .remarksLeft{
     flex: 1.5;
@@ -87,6 +89,7 @@
   }
   .remarksContainer{
     margin-left: -2%;
+    height: 120px;
 }
 .dataContainer{
   margin-top: 18%;

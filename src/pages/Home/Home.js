@@ -28,6 +28,7 @@ const Home = () => {
    useEffect(() => {
     setFilterData(data)
    },[data])
+
   useEffect(() => {
    let active = filterData.filter(item => item.Status === "active");
       setActiveData(active);

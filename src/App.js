@@ -20,9 +20,7 @@ import { useContext, useEffect } from "react";
 import EditUser from "./pages/EditUser/EditUser";
 
 function App() {
-  useEffect(() => {
-    console.log("new")
-  },[])
+
 
   const {currentUser} = useContext(AuthContext)
 

@@ -65,7 +65,7 @@ useEffect(() => {
             </div>
         <div />
         <div className={classes.items} >
-            
+            <button className={classes.fetch_button}>New</button>
             <div className={classes.item}>
               <PersonIcon className={classes.icon}/>
               {name}

@@ -7,13 +7,13 @@ import { DataContext } from '../../components/context/DataContext';
 
 const Enquiries = () => {
   const {data} = useContext(DataContext);
-
+  
   return (
     <div className={classes.enquiries}>
         <Sidebar/>
         <div className={classes.enquiriescontainer}>
             <Navbar data={data}/>
-              <Datatable data={data}/>
+              <Datatable />
         </div>
     </div>
   )
