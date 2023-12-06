@@ -1,12 +1,11 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import classes from './AddOld.module.css';
 import Sidebar from '../../components/sidebar/Sidebar';
-import Navbar from '../../components/navbar/Navbar';
 import { useState,useEffect } from 'react';
-import { addDoc, collection, doc, getDoc, setDoc,getDocs,updateDoc  } from "firebase/firestore"; 
+import { collection, doc, getDoc, setDoc,getDocs,updateDoc  } from "firebase/firestore"; 
+import { DataContext } from '../../components/context/DataContext';
 import { db } from '../../firebase';
 import { useNavigate } from 'react-router-dom';
-import Modal from '../../components/modal/Modal';
 import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
 
@@ -64,7 +63,7 @@ const AddOld = () => {
     const [order_number,setOrderNumber] = useState("");
     const [dataArray, setDataArray] = useState([]);
     const [inputValue2, setInputValue2] = useState('');
-
+    const {addNewData} = useContext(DataContext);
 
     var id="";
     var OrderID = '';
@@ -166,32 +165,35 @@ const AddOld = () => {
         
         if(formData.date && formData.crm && formData.source && formData.enquirytype && formData.name && formData.revenue && formData.product && formData.typeofpurchase && formData.status)
         {
+          const data = {
+            ID: order_id,
+            id: order_id,
+            Date: formData.date,
+            Crm: formData.crm,
+            Source: formData.source,
+            EnquiryType: formData.enquirytype,
+            Name: formData.name,
+            CompanyName: formData.companyname || null,
+            GST: formData.gst || null,
+            Address: formData.address || null,
+            City: formData.city || null,
+            Pincode: formData.pincode || null,
+            Contact: formData.contact || null,
+            Contact2: formData.contact2 || null,
+            Email: formData.email || null,
+            Category: formData.category || null,
+            Product: formData.product,
+            Revenue: formData.revenue,
+            TypeOfPurchase: formData.typeofpurchase,
+            Remarks: dataArray,
+            Status: formData.status,
+            ReminderDate: formData.reminderDate || null,
+            
+      }
         try{
-            const res = await setDoc(doc(db, "enquiries",order_id), {
-                    ID: order_id,
-                    Date: formData.date,
-                    Crm: formData.crm,
-                    Source: formData.source,
-                    EnquiryType: formData.enquirytype,
-                    Name: formData.name,
-                    CompanyName: formData.companyname || null,
-                    GST: formData.gst || null,
-                    Address: formData.address || null,
-                    City: formData.city || null,
-                    Pincode: formData.pincode || null,
-                    Contact: formData.contact || null,
-                    Contact2: formData.contact2 || null,
-                    Email: formData.email || null,
-                    Category: formData.category || null,
-                    Product: formData.product,
-                    Revenue: formData.revenue,
-                    TypeOfPurchase: formData.typeofpurchase,
-                    Remarks: dataArray,
-                    Status: formData.status,
-                    ReminderDate: formData.reminderDate || null,
-                    
-              })
+            const res = await setDoc(doc(db, "enquiries",order_id), data)
               .then(()=>{
+                addNewData(data)
                 navigate(`/enquiries/${formData.crm.replace(/\s/g, '')}`)
                 const enquiryRef = doc(db, "enquiryid", "T6k1a5DIQ6JLml1SKpCc");
 
