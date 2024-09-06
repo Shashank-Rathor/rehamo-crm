@@ -158,9 +158,12 @@ const [order_id, setOrderID] = useState('');
                     <div className={classes.detailItem}>
                       <span className={classes.itemKey}>Status: <span>{data.Status}</span></span>
                     </div>
-                    <div className={classes.detailItem}>
+                    {data.Reasonforclosing != null ? <div className={classes.detailItem}>
+                      <span className={classes.itemKey}>Reason for closing: <span>{data.Reasonforclosing}</span></span>
+                    </div> : <></>}
+                    {data.Reasonforclosing !== null ? <div className={classes.detailItem}>
                       <span className={classes.itemKey}>Revenue: <span>Rs. {data.Revenue}</span></span>
-                    </div>
+                    </div> : <></>}
                     {data.ReminderDate !== null ? 
                     <>
                     <div className={classes.detailItem}>

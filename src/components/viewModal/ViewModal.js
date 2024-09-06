@@ -38,10 +38,11 @@ const ViewModal = ({isOpen, onClose,viewData}) => {
         <div className={classes.mainContainer}>
         <div><strong>Type:</strong> {viewData.TypeOfPurchase}</div>
         <div><strong>Status:</strong> {viewData.Status}</div>
-        <div><strong>Revenue:</strong> {viewData.Revenue}</div>
+        {viewData.Reasonforclosing != null ? <div><strong>Reason for closing:</strong> {viewData.Reasonforclosing}</div> :<></>}
         </div>
         <div className={classes.mainContainer}>
-        <div style={{width: "300px"}}><strong>Reminder Date:</strong> {viewData.ReminderDate}</div>
+        <div><strong>Revenue:</strong> {viewData.Revenue}</div>
+        <div style={{width: "400px"}}><strong>Reminder Date:</strong> {viewData.ReminderDate}</div>
         </div>
         <div className={classes.remarksContainer}>
               {viewData.Remarks ? <div className={classes.detailItem} style={{width: "100%"}}>

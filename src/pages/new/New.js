@@ -72,6 +72,7 @@ const New = () => {
         remarks:'',
         typeofpurchase: '',
         status: '',
+        reasonforclosing: '',
         revenue: '',
     });
     const [order_id,setOrderID] = useState("");
@@ -166,6 +167,7 @@ const New = () => {
                 TypeOfPurchase: formData.typeofpurchase,
                 Remarks: dataArray,
                 Status: formData.status,
+                Reasonforclosing: formData.reasonforclosing || null,
                 ReminderDate: formData.reminderDate || null,
                 id: order_id
           }
@@ -411,6 +413,23 @@ const New = () => {
                         </select>
                     </div>
                     <div className={classes.formInput}>
+                        <label>Reason for Closing</label>
+                        <select 
+                        id="reasonforclosing" 
+                        name="reasonforclosing"
+                        value={formData.reasonforclosing}
+                        onChange={handleInput}
+                        >
+                            <option value="default">Select</option>
+                            <option value="Out of Stock">Out of Stock</option>
+                            <option value="Not our product">Not our product</option>
+                            <option value="Costly">Costly</option>
+                            <option value="Quick delivery">Quick delivery</option>
+                            <option value="No response">No response</option>
+                            <option value="Others">Others</option>
+                        </select>
+                    </div>
+                    <div className={classes.formInput}>
                     <label>Revenue</label>
                         <input 
                         id="revenue" 
@@ -445,7 +464,6 @@ const New = () => {
                         renderInput={(params) => <TextField {...params} label="Category" />}
                     />
                     </div>  
-                    <div className={classes.formInput}></div>
                     <div className={classes.formInput}>
                         <label>Product</label>
                         <textarea 

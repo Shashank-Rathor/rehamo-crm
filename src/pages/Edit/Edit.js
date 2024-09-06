@@ -72,6 +72,7 @@ const Edit = () => {
         remarks:'',
         typeofpurchase: '',
         status: '',
+        reasonforclosing: ''
     });
     const [data,setData] = useState([]);
     const [order_id,setOrderID] = useState("");
@@ -120,6 +121,7 @@ const Edit = () => {
                     typeofpurchase: res.data().TypeOfPurchase,
                     remarks: res.data().Remarks,
                     status: res.data().Status,
+                    reasonforclosing: res.data().Reasonforclosing,
                     reminderDate: res.data().ReminderDate,
                     revenue: res.data().Revenue,
                 })
@@ -167,6 +169,7 @@ const Edit = () => {
             TypeOfPurchase: formData.typeofpurchase,
             Remarks: dataArray,
             Status: formData.status,
+            Reasonforclosing: formData.reasonforclosing || null,
             ReminderDate: formData.reminderDate || null,
       }
         try{
@@ -406,6 +409,23 @@ const Edit = () => {
                         </select>
                     </div>
                     <div className={classes.formInput}>
+                        <label>Reason for Closing</label>
+                        <select 
+                        id="reasonforclosing" 
+                        name="reasonforclosing"
+                        value={formData.reasonforclosing}
+                        onChange={handleInput}
+                        >
+                            <option value="default">Select</option>
+                            <option value="Out of Stock">Out of Stock</option>
+                            <option value="Not our product">Not our product</option>
+                            <option value="Costly">Costly</option>
+                            <option value="Quick delivery">Quick delivery</option>
+                            <option value="No response">No response</option>
+                            <option value="Others">Others</option>
+                        </select>
+                    </div>
+                    <div className={classes.formInput}>
                     <label>Revenue</label>
                     <input 
                         id="revenue" 
@@ -440,7 +460,6 @@ const Edit = () => {
                         renderInput={(params) => <TextField {...params} label="Category" />}
                     />
                     </div>  
-                    <div className={classes.formInput}></div>
                     <div className={classes.formInput}>
                         <label>Product</label>
                         <textarea 

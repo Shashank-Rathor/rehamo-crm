@@ -57,6 +57,7 @@ const AddOld = () => {
         remarks:'',
         typeofpurchase: '',
         status: '',
+        reasonforclosing: '',
         revenue: '',
     });
     const [order_id,setOrderID] = useState("");
@@ -128,6 +129,7 @@ const AddOld = () => {
                   typeofpurchase: "",
                   remarks: "",
                   status: "",
+                  reasonforclosing: "",
                   reminderDate: "",
                   revenue: "",
               })
@@ -187,6 +189,7 @@ const AddOld = () => {
             TypeOfPurchase: formData.typeofpurchase,
             Remarks: dataArray,
             Status: formData.status,
+            Reasonforclosing: formData.reasonforclosing || null,
             ReminderDate: formData.reminderDate || null,
             
       }
@@ -418,6 +421,23 @@ const AddOld = () => {
                             <option value="active">Active</option>
                             <option value="closed">Closed</option>
                             <option value="sold">Sold</option>
+                        </select>
+                    </div>
+                    <div className={classes.formInput}>
+                        <label>Reason for Closing</label>
+                        <select 
+                        id="reasonforclosing" 
+                        name="reasonforclosing"
+                        value={formData.reasonforclosing}
+                        onChange={handleInput}
+                        >
+                            <option value="default">Select</option>
+                            <option value="Out of Stock">Out of Stock</option>
+                            <option value="Not our product">Not our product</option>
+                            <option value="Costly">Costly</option>
+                            <option value="Quick delivery">Quick delivery</option>
+                            <option value="No response">No response</option>
+                            <option value="Others">Others</option>
                         </select>
                     </div>
                     <div className={classes.formInput}>
